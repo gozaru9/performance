@@ -7,7 +7,7 @@ var app = angular.module('myApp', ['ngResource', 'ngRoute', 'ui.bootstrap',
             .when('/', {
                 templateUrl: 'views/main.html',
             })
-            .when('login', {
+            .when('/login', {
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })

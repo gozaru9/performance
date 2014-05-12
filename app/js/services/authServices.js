@@ -11,7 +11,6 @@ authServices.factory("Auth", ['$resource', '$http', '$location', 'Utility',
             $http.post('api/login', {mailAddress: data.mailAddress, password: data.password
             }).success(function(data){
                 
-//                location.herf = '/';
                 $location.path("/");
 
             }).error(function(data) {
