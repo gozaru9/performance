@@ -1,0 +1,156 @@
+    <div class="row">
+        <div class="col-lg-12" >
+        
+            <div class="alert alert-danger">チームの総合値をどう出すかを考えないと。。。</div>
+            
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Team
+                </div>
+                <div class="panel-body" ng-controller="TeamsCtrl" ng-init="initialize()">
+
+                    <form name="teamsForm" novalidate>
+                    
+                        <div class="form-group" tooltip="プロジェクトを選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <select class="form-control" ng-model="data.project" 
+                                ng-options="project._id as project.name for project in projectList">
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="チーム名を入力してください" ng-model="data.name" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="説明を入力してください" ng-model="data.description"/>
+                        </div>
+                        
+                        <!-- チームメンバーを表示するエリア -->
+                        <div class="form-group">
+                            <div>
+                        	    <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">メンバーを選択する</button>
+                        	    <button class="btn btn-default" ng-click="isOpenList = !isOpenList">一覧を見る</button>
+                            </div>
+                        	<div class="user-search-box" collapse="!isCollapsed">
+                                <!-- ユーザーの検索エリア -->
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="複数の場合は半角スペース" 
+                                        ng-model="keywords" ng-keyup="search()">
+                                </div>
+                                
+                                <div class="form-group">
+                                
+                                    <ul class="user-list ">
+                                        <li ng-repeat="user in userList">
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                    
+                                                    <img ng-if="!!user.userImagePath" tooltip="クリックすると詳細を表示します" tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                                        ng-src="user.userImagePath" ng-click="popupView(user._id, $index)" ></img>
+                                                    <img ng-if="!user.userImagePath" class='img-responsive' tooltip="クリックすると詳細を表示します" tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                                        ng-src="userImage/no-image.png" ng-click="popupView(user._id, $index)" ></img>
+                                                        
+                                                    <button class="btn btn-sm btn-primary" ng-click="addMember($index)">追加</button>
+                                                </div>
+                                                <div class="clearfix col-lg-5 col-md-5 col-sm-5 col-xs-10">
+                                                    <table>
+                                                        <tr>
+                                                            <th><span class="label label-warning">社員番号</span></th>
+                                                            <td>{{ user.employeeNumber }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><span class="label label-warning">氏名</span></th>
+                                                            <td>
+                                                                <a href="#/member/mgt/{{ user._id }}"><ruby>
+                                                                    {{ user.lastName }}{{ user.firstName }}<rp>(</rp><rt>{{ user.lastNameKana }}{{ user.firstNameKana }}</rt><rp>)</rp>
+                                                                </ruby></a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><span class="label label-warning">メールアドレス</span></th>
+                                                            <td>{{ user.mailAddress }}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="clearfix col-lg-5 col-md-5 hidden-sm hidden-xs">
+                                                    <table>
+                                                        <tr>
+                                                            <th><span class="label label-warning">組織</span></th>
+                                                            <td>
+                                                                <span ng-repeat="organizations in user.organizations">{{ organizations.name }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><span class="label label-warning">役職</span></th>
+                                                            <td>
+                                                                <span ng-repeat="posts in user.posts">{{ posts.name }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th><span class="label label-warning">ランク</span></th>
+                                                            <td>
+                                                                <span>{{ user.ranks.name }}</span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                        	</div>
+                        </div>
+                        <!-- select member box -->
+                        <div class="form-group" ng-show="isSelected">
+                        <!--
+                            <div class="number-box-primary">
+                                {{selectedNumber}}
+                            </div>
+                        -->
+                            <hr>
+                            <div class="selected-member-box">
+                                
+                                <span ng-repeat="member in selectedMemberList" class="label label-success user-label">
+                                    {{member.lastName}}{{member.firstName}}
+                                    <button type="button" class="delete" ng-click="removeMember($index)">&times;</button>
+                                </span>
+                                    
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div class="text-center">
+                            <button ng-show="isCreate" ng-click="create()" class="btn btn-lg btn-primary" ng-disabled="!teamsForm.$valid">登録する</button>
+                            <button ng-show="!isCreate" ng-click="update()" class="btn btn-lg btn-primary" ng-disabled="!teamsForm.$valid">更新する</button>
+                            <button ng-show="!isCreate" ng-click="remove()" class="btn btn-lg btn-warning" ng-disabled="!teamsForm.$valid">削除する</button>
+                        </div>
+                    </form>
+                    
+                    <div class="table-responsive" collapse="!isOpenList">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>プロジェクト名</th>
+                                    <th>チーム名</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="team in teamsList">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ team.project.name }}</td>
+                                    <td>{{ team.name }}</td>
+                                    <td><button type="button" class="btn btn-default" ng-click="modeUpdate($index)">update</button></td>
+                                    <td><button type="button" class="btn btn-default" ng-click="delete(team._id, $index)">delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                
+                    
+                </div>
+            </div>
+        </div>
+    </div>

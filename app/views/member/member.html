@@ -1,0 +1,96 @@
+    <div ng-controller="UsersListCtrl" ng-init="initialize()">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> search member
+            </div>
+            <div class="panel-body" >
+                    
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="btn-group" tooltip="表示順を選択してください" tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                    <button type="button" class="btn btn-default" ng-model="sort" btn-radio="'1'">登録順</button>
+                                    <button type="button" class="btn btn-default" ng-model="sort" btn-radio="'2'">社員番号順</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" placeholder="複数の場合は半角スペース" 
+                                    ng-model="keywords" ng-keyup="search()">
+                            </div>
+                        </div>
+                        
+                        <!-- 詳細検索エリアを作りたい -->
+                            <!-- 組織 -->
+                            <!-- 種別 -->
+                            <!-- 入社日 -->
+                            
+                        
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            
+            <ul class="user-list ">
+                <li ng-repeat="user in userList">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            
+                            <img ng-if="!!user.userImagePath" tooltip="クリックすると詳細を表示します" tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                ng-src="user.userImagePath" ng-click="popupView(user._id, $index)" ></img>
+                            <img ng-if="!user.userImagePath" class='img-responsive' tooltip="クリックすると詳細を表示します" tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                ng-src="userImage/no-image.png" ng-click="popupView(user._id, $index)" ></img>
+                        </div>
+                        <div class="clearfix col-lg-5 col-md-5 col-sm-5 col-xs-10">
+                            <table>
+                                <tr>
+                                    <th><span class="label label-warning">社員番号</span></th>
+                                    <td>{{ user.employeeNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <th><span class="label label-warning">氏名</span></th>
+                                    <td>
+                                        <a href="#/member/mgt/{{ user._id }}"><ruby>
+                                            {{ user.lastName }}{{ user.firstName }}<rp>(</rp><rt>{{ user.lastNameKana }}{{ user.firstNameKana }}</rt><rp>)</rp>
+                                        </ruby></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><span class="label label-warning">メールアドレス</span></th>
+                                    <td>{{ user.mailAddress }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clearfix col-lg-5 col-md-5 hidden-sm hidden-xs">
+                            <table>
+                                <tr>
+                                    <th><span class="label label-warning">組織</span></th>
+                                    <td>
+                                        <span ng-repeat="organizations in user.organizations">{{ organizations.name }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><span class="label label-warning">役職</span></th>
+                                    <td>
+                                        <span ng-repeat="posts in user.posts">{{ posts.name }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><span class="label label-warning">ランク</span></th>
+                                    <td>
+                                        <span>{{ user.ranks.name }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+

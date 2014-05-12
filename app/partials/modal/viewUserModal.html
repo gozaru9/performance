@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()">&times;</button>
+    <h4>
+        <ruby>
+            {{ modalParam.lastName }}{{ modalParam.firstName }}<rp>(</rp><rt>{{ modalParam.lastNameKana }}{{ modalParam.firstNameKana }}</rt><rp>)</rp>
+        </ruby>
+    </h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        
+        <div class="col-sm-2">
+            <img ng-if="!!modalParam.userImagePath" ng-src="modalParam.userImagePath" ></img>
+            <img ng-if="!modalParam.userImagePath" ng-src="userImage/no-image.png" ></img>
+        </div>
+        <div class="col-sm-10 profile-popup">
+                    
+            <table>
+                <tr>
+                    <th><span class="label label-warning">社員番号</span></th>
+                    <td>{{ modalParam.employeeNumber }}</td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">メールアドレス</span></th>
+                    <td>{{ modalParam.mailAddress }}</td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">タグ</span></th>
+                    <td>
+                        <p ng-repeat="tag in modalParam.tags">{{ tag.name }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">組織</span></th>
+                    <td>
+                        <p ng-repeat="organizations in modalParam.organizations">{{ organizations.name }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">役職</span></th>
+                    <td>
+                        <p ng-repeat="posts in modalParam.posts">{{ posts.name }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">ランク</span></th>
+                    <td>
+                        <span>{{ modalParam.ranks.name }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">スキル</span></th>
+                    <td>
+                        <span>{{ modalParam.ranks.name }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="label label-warning">プロジェクト</span></th>
+                    <td>
+                        <p ng-repeat="project in modalParam.projects">{{ project.name }}</p>
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$close()">Close</button>
+    <button class="btn btn-primary" ng-click="update()">Save changes</button>
+</div>

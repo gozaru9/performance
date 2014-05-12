@@ -1,0 +1,412 @@
+          <div class="row">
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img data-src="holder.js/100%x180" alt="...">
+              </a>
+            </div>
+          </div>
+
+          <!-- Nav tabs -->
+          <div>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#profile#360" data-toggle="tab">360</a></li>
+              <li><a href="#profile#Skills" data-toggle="tab">Skills</a></li>
+              <li><a href="#profile#Certificates" data-toggle="tab">Certificates</a></li>
+              <li><a href="#profile#Resume" data-toggle="tab">Resume</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <!-- 360 - Multi Demention Feedback Section -->
+              <div class="tab-pane fade in active" id="360">
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <canvas id="canvas" height="400" width="400"></canvas>
+                    <script>
+                      var radarChartData = {
+                        labels : ["Eating","Drinking","Sleeping","Designing","Coding","Partying","Running"],
+                        datasets : [
+                          {
+                            fillColor : "rgba(220,220,220,0.5)",
+                            strokeColor : "rgba(220,220,220,1)",
+                            pointColor : "rgba(220,220,220,1)",
+                            pointStrokeColor : "#fff",
+                            data : [65,59,90,81,56,55,40]
+                          },
+                          {
+                            fillColor : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,1)",
+                            pointColor : "rgba(151,187,205,1)",
+                            pointStrokeColor : "#fff",
+                            data : [28,48,40,19,96,27,100]
+                          }
+                        ]
+                        
+                      }
+
+                    var myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
+                    </script>
+                  </div>
+                  <div class="col-md-6">
+                    <canvas id="canvas2" height="400" width="400"></canvas>
+                    <script>
+                      var radarChartData = {
+                        labels : ["Eating","Drinking","Sleeping","Designing","Coding","Partying","Running"],
+                        datasets : [
+                          {
+                            fillColor : "rgba(220,220,220,0.5)",
+                            strokeColor : "rgba(220,220,220,1)",
+                            pointColor : "rgba(220,220,220,1)",
+                            pointStrokeColor : "#fff",
+                            data : [20,34,80,34,90,49,60]
+                          },
+                          {
+                            fillColor : "rgba(151,187,205,0.5)",
+                            strokeColor : "rgba(151,187,205,1)",
+                            pointColor : "rgba(151,187,205,1)",
+                            pointStrokeColor : "#fff",
+                            data : [48,78,39,45,80,40,100]
+                          }
+                        ]
+                        
+                      }
+
+                    var myRadar = new Chart(document.getElementById("canvas2").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
+                    </script>                    
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Header</th>
+                          <th>Header</th>
+                          <th>Header</th>
+                          <th>Header</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1,001</td>
+                          <td>Lorem</td>
+                          <td>ipsum</td>
+                          <td>dolor</td>
+                          <td>sit</td>
+                        </tr>
+                        <tr>
+                          <td>1,002</td>
+                          <td>amet</td>
+                          <td>consectetur</td>
+                          <td>adipiscing</td>
+                          <td>elit</td>
+                        </tr>
+                        <tr>
+                          <td>1,003</td>
+                          <td>Integer</td>
+                          <td>nec</td>
+                          <td>odio</td>
+                          <td>Praesent</td>
+                        </tr>
+                        <tr>
+                          <td>1,003</td>
+                          <td>libero</td>
+                          <td>Sed</td>
+                          <td>cursus</td>
+                          <td>ante</td>
+                        </tr>
+                        <tr>
+                          <td>1,004</td>
+                          <td>dapibus</td>
+                          <td>diam</td>
+                          <td>Sed</td>
+                          <td>nisi</td>
+                        </tr>
+                        <tr>
+                          <td>1,005</td>
+                          <td>Nulla</td>
+                          <td>quis</td>
+                          <td>sem</td>
+                          <td>at</td>
+                        </tr>
+                        <tr>
+                          <td>1,006</td>
+                          <td>nibh</td>
+                          <td>elementum</td>
+                          <td>imperdiet</td>
+                          <td>Duis</td>
+                        </tr>
+                        <tr>
+                          <td>1,007</td>
+                          <td>sagittis</td>
+                          <td>ipsum</td>
+                          <td>Praesent</td>
+                          <td>mauris</td>
+                        </tr>
+                        <tr>
+                          <td>1,008</td>
+                          <td>Fusce</td>
+                          <td>nec</td>
+                          <td>tellus</td>
+                          <td>sed</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Skills Section -->
+              <div class="tab-pane fade" id="Skills">
+                <h3 class="sub-header">Technical</h3>
+                <h5 class="sub-header">Programming</h5>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div>                
+                <h3 class="sub-header">methodology</h3>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div> 
+                <h3 class="sub-header">Business/Industry Knowledge</h3>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div>                
+                <h3 class="sub-header">Project Management</h3>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div>                
+                <h3 class="sub-header">Personal Skills</h3>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div>                
+              </div>
+
+              <!-- Certificates Section -->
+              <div class="tab-pane fade" id="Certificates">
+                 <!-- Button trigger modal -->
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createCertificates">
+                  Create Certificates
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="createCertificates" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Create My Certificates</h4>
+                      </div>
+                      <div class="modal-body">
+                        Create My Certificates ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1,001</td>
+                        <td>Lorem</td>
+                        <td>ipsum</td>
+                        <td>dolor</td>
+                        <td>sit</td>
+                      </tr>
+                      <tr>
+                        <td>1,002</td>
+                        <td>amet</td>
+                        <td>consectetur</td>
+                        <td>adipiscing</td>
+                        <td>elit</td>
+                      </tr>
+                      <tr>
+                        <td>1,003</td>
+                        <td>Integer</td>
+                        <td>nec</td>
+                        <td>odio</td>
+                        <td>Praesent</td>
+                      </tr>
+                      <tr>
+                        <td>1,003</td>
+                        <td>libero</td>
+                        <td>Sed</td>
+                        <td>cursus</td>
+                        <td>ante</td>
+                      </tr>
+                      <tr>
+                        <td>1,004</td>
+                        <td>dapibus</td>
+                        <td>diam</td>
+                        <td>Sed</td>
+                        <td>nisi</td>
+                      </tr>
+                      <tr>
+                        <td>1,005</td>
+                        <td>Nulla</td>
+                        <td>quis</td>
+                        <td>sem</td>
+                        <td>at</td>
+                      </tr>
+                      <tr>
+                        <td>1,006</td>
+                        <td>nibh</td>
+                        <td>elementum</td>
+                        <td>imperdiet</td>
+                        <td>Duis</td>
+                      </tr>
+                      <tr>
+                        <td>1,007</td>
+                        <td>sagittis</td>
+                        <td>ipsum</td>
+                        <td>Praesent</td>
+                        <td>mauris</td>
+                      </tr>
+                      <tr>
+                        <td>1,008</td>
+                        <td>Fusce</td>
+                        <td>nec</td>
+                        <td>tellus</td>
+                        <td>sed</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Resume Section -->
+              <div class="tab-pane fade" id="Resume">
+
+                <!-- Button trigger modal -->
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#createResume">
+                  Create Resume
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="createResume" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Create My Resume</h4>
+                      </div>
+                      <div class="modal-body">
+                        Create My Resume ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                        <th>Header</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1,001</td>
+                        <td>Lorem</td>
+                        <td>ipsum</td>
+                        <td>dolor</td>
+                        <td>sit</td>
+                      </tr>
+                      <tr>
+                        <td>1,002</td>
+                        <td>amet</td>
+                        <td>consectetur</td>
+                        <td>adipiscing</td>
+                        <td>elit</td>
+                      </tr>
+                      <tr>
+                        <td>1,003</td>
+                        <td>Integer</td>
+                        <td>nec</td>
+                        <td>odio</td>
+                        <td>Praesent</td>
+                      </tr>
+                      <tr>
+                        <td>1,003</td>
+                        <td>libero</td>
+                        <td>Sed</td>
+                        <td>cursus</td>
+                        <td>ante</td>
+                      </tr>
+                      <tr>
+                        <td>1,004</td>
+                        <td>dapibus</td>
+                        <td>diam</td>
+                        <td>Sed</td>
+                        <td>nisi</td>
+                      </tr>
+                      <tr>
+                        <td>1,005</td>
+                        <td>Nulla</td>
+                        <td>quis</td>
+                        <td>sem</td>
+                        <td>at</td>
+                      </tr>
+                      <tr>
+                        <td>1,006</td>
+                        <td>nibh</td>
+                        <td>elementum</td>
+                        <td>imperdiet</td>
+                        <td>Duis</td>
+                      </tr>
+                      <tr>
+                        <td>1,007</td>
+                        <td>sagittis</td>
+                        <td>ipsum</td>
+                        <td>Praesent</td>
+                        <td>mauris</td>
+                      </tr>
+                      <tr>
+                        <td>1,008</td>
+                        <td>Fusce</td>
+                        <td>nec</td>
+                        <td>tellus</td>
+                        <td>sed</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+    <script src="js/vendor/docs.min.js"></script>

@@ -1,0 +1,292 @@
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <i class="fa fa-bar-chart-o fa-fw"></i> create member
+        </div>
+        <div class="panel-body" >
+            <form name="createForm" ng-submit="submit()" class="form-horizontal css-form" ng-controller="UsersCtrl" ng-init="initialize()" novalidate>
+                    <!-- 画像 -->
+                    <div class="form-group">
+                        <div class="media">
+                            <a href="#" class="pull-left">
+                                <img class="media-object" src="{{File.mozFullPath}}">
+                            </a>
+                            
+                            <div class="media-body">
+                
+                                <!-- file upload -->            
+                                <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Add</span>
+                                    <input type="file" name="files" fileupload>
+                                </span>
+                
+                                <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
+                                    <i class="glyphicon glyphicon-ban-circle"></i>
+                                    <span>Cancel</span>
+                                </button>
+                
+                                <div>
+                                    <span ng-show="!files.length">No files selected</span>
+                                    <ul>
+                                        <li ng-repeat="file in files">{{file}}</li>
+                                    </ul>
+                                </div>
+
+                                <!--
+                                <input type="file" fileupload name="file" data-url="userImage/", done="uploadFinished(e, data)">
+                                <h4 class="media-heading">画像を設定できます</h4>
+                                <file-upload-directive></file-upload-directive>-->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 姓 -->
+                    <!-- 名 -->
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="姓を入力してください" 
+                                tooltip="姓を入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.lastName" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="名を入力してください" 
+                                tooltip="名を入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.firstName" required>
+                        </div>
+                    </div>
+                    <!-- 姓かな -->
+                    <!-- 名かな -->
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="姓(カナ)を入力してください" 
+                                tooltip="姓(カナ)を入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.lastNameKana" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="名(カナ)を入力してください" 
+                                tooltip="名(カナ)を入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.firstNameKana" required>
+                        </div>
+                    </div>
+                    <!-- 生年月日 -->
+                    <div class="form-group" tooltip="生年月日を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                        <div class="col-sm-3">
+                            <select class="form-control" ng-change="createOptions()" ng-model="data.birthYear" 
+                                ng-options="year.value as year.text for year in yearList" required>
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-sm-2">
+                            <select class="form-control" ng-change="createOptions()" ng-model="data.birthMonth" 
+                                ng-options="month.value as month.text  for month in monthList" required>
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-sm-2">
+                            <select class="form-control" ng-change="getAge()" ng-model="data.birthDay" 
+                                ng-options="day.value as day.text for day in dayList" required>
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- 年齢 -->
+                    <div class="form-group">
+                        <div class="col-sm-10" ng-show="data.age">
+                            年齢は{{data.age}}歳です
+                        </div>
+                    </div>
+                    <!-- 性別 -->
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <div class="btn-group" tooltip="性別を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                <button type="button" class="btn btn-default" ng-model="data.sex" btn-radio="'1'">男</button>
+                                <button type="button" class="btn btn-default" ng-model="data.sex" btn-radio="'2'">女</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 電話番号 -->
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <input type="text" name="telFront" class="form-control" placeholder="電話番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.telFront" autocomplete="off" 
+                                ng-minlength="2" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="telCenter" class="form-control" placeholder="電話番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.telCenter" autocomplete="off" 
+                                ng-minlength="3" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="telBack" class="form-control" placeholder="電話番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.telBack" autocomplete="off" 
+                                ng-minlength="2" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+                        </div>
+                    </div>
+                    
+                    <!-- 郵便番号 -->
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <input type="text" name="zipFront" class="form-control" placeholder="郵便番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.zipFront" autocomplete="off" 
+                                ng-minlength="3" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="zipBack" class="form-control" placeholder="郵便番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.zipBack" autocomplete="off" 
+                                ng-minlength="4" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary" ng-disabled="!createForm.$valid">住所検索</button>
+                        </div>
+                    </div>
+                    <!-- 都道府県 -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <select class="form-control" ng-change="getAge()" ng-model="data.prefectures" 
+                                ng-options="prefectures.value as prefectures.text for prefectures in prefecturesList" required>
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- 市区群町村 -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="city" class="form-control" placeholder="市区群町村を入力してください"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.city" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <!-- 番地/ﾏﾝｼｮﾝ名 -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="address" class="form-control" placeholder="番地/ﾏﾝｼｮﾝ名を入力してください"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.address" autocomplete="off" required>
+                        </div>
+                    </div>
+                    
+                    <!-- メールアドレス -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" name="mailaddress" class="form-control" placeholder="メールアドレスを入力してください"
+                                tooltip="メールアドレスを入力してください" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.mailAddress" autocomplete="off" required>
+                        </div>
+                    </div>
+                    
+                    <!-- パスワード -->
+                    <div class="form-group">
+                        <div class="col-sm-7">
+                            <input type="password" name="password" class="form-control" placeholder="パスワードを入力してください" 
+                                tooltip="パスワードを入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-minlength="8" ng-show="!showPassword" ng-model="data.password" required>
+                            <input type="text" class="form-control" name="plainPassword" ng-show="showPassword" ng-model="data.password" required>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" ng-model="showPassword" btn-checkbox>パスワードを表示する</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- パスワード確認用 -->
+                    <div class="form-group">
+                        <div class="col-sm-7">
+                            <input type="password" name="passwordConfirm" class="form-control" placeholder="確認用パスワードを入力してください" 
+                                tooltip="パスワードを入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-show="!showPasswordConf" ng-model="data.passwordConfirm" match="data.password" required>
+                            <input type="text" name="passwordConfirm" class="form-control" name="plainPasswordConf" 
+                                tooltip="パスワードを入力してください" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-show="showPasswordConf" 
+                                ng-model="data.passwordConfirm" match="data.password" required>
+                            <span class="text-danger" ng-show="createForm.passwordConfirm.$error.mismatch">正しいメールアドレスを入力して下さい</span>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" ng-model="showPasswordConf" btn-checkbox>確認用パスワードを表示する</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    
+                    <!-- 社員番号 -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="社員番号を入力してください"
+                                tooltip="社員番号を入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.employeeNumber" required>
+                        </div>
+                    </div>
+                    
+                    <!-- 入社日-->
+                    <div class="form-group">
+                        <div class="col-sm-6" tooltip="入社日を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="data.entryDate" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 種別 -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="btn-group" tooltip="種別を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                <button type="button" class="btn btn-default" ng-model="data.employeeType" btn-radio="'1'">正社員</button>
+                                <button type="button" class="btn btn-default" ng-model="data.employeeType" btn-radio="'2'">契約社員</button>
+                                <button type="button" class="btn btn-default" ng-model="data.employeeType" btn-radio="'3'">アルバイト</button>
+                                <button type="button" class="btn btn-default" ng-model="data.employeeType" btn-radio="'9'">未設定</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 組織 -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <select class="form-control" ng-model="data.organizations" 
+                                tooltip="組織を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                ng-options="organization._id as organization.name for organization in organizationList" required>
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <!-- 役職 -->
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <select multiple class="form-control" ng-model="data.posts" 
+                                tooltip="役職を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                ng-options="post._id as post.name for post in postList" required>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- ランク -->
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <select class="form-control" ng-model="data.ranks" 
+                                tooltip="ランクを選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom"
+                                ng-options="rank._id as rank.name for rank in rankList" required>
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button ng-show="isCreate" type="submit" class="btn btn-lg btn-primary" ng-disabled="!createForm.$valid">登録する</button>
+                        <button ng-show="!isCreate" type="submit" class="btn btn-lg btn-primary" ng-disabled="!createForm.$valid">更新する</button>
+                        <button ng-show="!isCreate" ng-click="remove()" class="btn btn-lg btn-warning" >削除する</button>
+                    </div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,75 @@
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Project
+                </div>
+                <div class="panel-body" ng-controller="ProjectsCtrl" ng-init="initialize()">
+
+                    <form name="projectsForm" novalidate>
+                    
+                        <!-- 種別 -->
+                        <div class="form-group">
+                        
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="プロジェクト名を入力してください" ng-model="data.name" required>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6" tooltip="開始日を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="data.begin" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                </p>
+                            </div>
+                            <div class="col-sm-6" tooltip="終了日を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="data.end" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="説明を入力してください" ng-model="data.description"/>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success" ng-click="create()" ng-disabled="!projectsForm.$valid">登録する</button>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>プロジェクト名</th>
+                                    <th>期間</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="project in projectsList">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ project.name }}</td>
+                                    <td>{{ project.begin | date:'yyyy/MM/dd'}}～{{ project.end | date:'yyyy/MM/dd'}}</td>
+                                    <td><a href="#/project/team/{{ project._id }}" type="button" class="btn btn-default">チームを作成</a></td>
+                                    <td><button type="button" class="btn btn-default" data-toggle="modal"
+                                        ng-click="popupView(project._id, $index)">update</button></td>
+                                    <td><button type="button" class="btn btn-default" ng-click="delete(project._id, $index)">delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>

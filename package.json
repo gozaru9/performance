@@ -1,13 +1,21 @@
 {
-  "name": "chat-example",
-  "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server",
+  "name": "performancemgt",
+  "version": "0.0.1",
+  "description": "",
   "main": "server.js",
-  "repository": "",
-  "author": "Mostafa Eweda <mostafa@c9.io>",
+  "repository": "git@github.com:gozaru9/performance.git",
+  "author": "gozaru9",
   "dependencies": {
     "async": "~0.2.8",
-    "express": "~3.2.4",
-    "socket.io": "~0.9.14"
+    "express": "~3.2.6",
+    "moment": "~2.5.1",
+    "connect": "~2.14.3",
+    "connect-mongo": "~0.4.0",
+    "mongoose": "~3.8.8",
+    "log4js": "~0.6.12",
+    "node-zip": "~1.1.0",
+    "ejs": "~1.0.0",
+    "node-dev": "~2.3.0",
+    "uglify-js": "~2.4.13"
   }
 }

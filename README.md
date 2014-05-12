@@ -1,26 +1,18 @@
+http://soplana.hateblo.jp/entry/2014/03/01/231008
+http://dim5.net/angularjs/routeprovider-template.html
 
-    ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+service: ある程度まとまった関数群をまとめたUtilオブジェクト向け
+factory: ビジネスロジックをしっかり書いたりするようなモデル向け
 
+グローバルに近い値、複数コントローラで共有した値がある場合
+value, constant
+configフェーズでInjectして利用したい場合
+constant
+ステートレスなビジネスロジックを作成したい、またはユーティリティクラスを作成した場合
+service
+ステートフルなビジネスロジックを作成した場合
+factory
 
-Welcome to Cloud9 IDE!
+ng-init
 
-To get you started, we have created a demo chat application.
-
-1) Open the server.js file
-
-2) Click the 'Run' button at the top to start your server,
-
-3) Click the URL that is emitted to the Output tab of the console
-
-Happy coding!
-The Cloud9 IDE team
-
-## Support & Documentation
-
-Visit http://docs.c9.io for documentation, or http://support.c9.io for support.
-To watch some training videos, visit http://www.youtube.com/user/c9ide.
+http://qiita.com/opengl-8080/items/2fe0a20c314b1c824cc5

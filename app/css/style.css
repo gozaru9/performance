@@ -1,0 +1,201 @@
+body {
+    font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+
+.arrow {
+    float: right;
+}
+
+.fa.arrow:before {
+    content: "\f104";
+}
+
+.active > a > .fa.arrow:before {
+    content: "\f107";
+}
+.nav-second-level li,
+.nav-third-level li {
+    border-bottom: none !important;
+}
+
+.nav-second-level li a {
+    padding-left: 37px;
+}
+
+.nav-third-level li a {
+    padding-left: 52px;
+}
+/*----------------------------------------------------------------------------*/
+/* COMMON
+/*----------------------------------------------------------------------------*/
+i .collapse {
+    cursor: pointer;
+}
+
+/*----------------------------------------------------------------------------*/
+/* FORM
+/*----------------------------------------------------------------------------*/
+.css-form input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+    
+.css-form input.ng-valid.ng-dirty {
+    background-color: #FFF;
+}
+/*----------------------------------------------------------------------------*/
+/* ERROR
+/*----------------------------------------------------------------------------*/
+.error {
+    background-color: #FA787E;
+}
+
+/*----------------------------------------------------------------------------*/
+/* color picker
+/*----------------------------------------------------------------------------*/
+.color-selector {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: url( ../js/vendor/colorpicker/images/select.png );
+}
+.color-selector div {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 30px;
+    height: 30px;
+    background: url( ../js/vendor/colorpicker/images/select.png ) center;
+}
+.color-box {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: url( ../js/vendor/colorpicker/images/select.png );
+}
+.color-box div {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 30px;
+    height: 30px;
+    background: url( ../js/vendor/colorpicker/images/select.png ) center;
+}
+
+/*----------------------------------------------------------------------------*/
+/* user list
+/*----------------------------------------------------------------------------*/
+.user-list {padding-left: 0;}
+
+.user-list > li {
+  position: relative;
+  display: block;
+  height:90px;
+  padding: 5px 10px;
+  margin-bottom: -1px;
+  background-color: #ffffff;
+  border-top: 1px dashed #dddddd;
+  border-bottom: 1px dashed #dddddd;
+}
+
+.user-list > li > div > div> img {
+    margin-right:15px;
+    float:left;
+}
+.user-list > li > div > div> button {
+    margin-top:15px;
+}
+.user-list > li > div > div > table > tbody > tr > th {
+    padding: 3px;
+}
+.user-list > li > div > div > table > tbody > tr > th > td {
+    word-break: break-all;
+}
+.user-list > li > div > div > table > tbody > tr > th > span {
+    margin-right:10px;
+}
+
+.user-label {
+    font-size: 14px;
+    margin-right:10px;
+}
+
+.user-label .delete {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+/*    
+    opacity: 0.2;
+*/
+    text-shadow: 0 1px 0 #FFFFFF;    
+}
+
+/*----------------------------------------------------------------------------*/
+/* user view
+/*----------------------------------------------------------------------------*/
+.profile-popup {}
+.profile-popup table > tbody > tr > th {
+    padding: 3px;
+}
+.profile-popup > table > tbody > tr > th > span {
+    margin-right:10px;
+}
+
+/*----------------------------------------------------------------------------*/
+/* file input
+/*----------------------------------------------------------------------------*/
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/*----------------------------------------------------------------------------*/
+/* box
+/*----------------------------------------------------------------------------*/
+.user-search-box {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border:1px solid #eee;
+}
+.selected-user-box {
+    display: table;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border:1px dashed #eee;
+}
+.selected-user-box > span {
+    float:left;
+}
+
+.number-box-primary {
+    position: fixed;
+    top: 50px;
+    right:0;
+    padding: 15px;
+    border:2px solid #357EBD;
+    background-color:#428BCA;
+    color:#FFF;
+    text-align:center;
+    font-size: 15px;
+    max-width:70px;
+    font-weight: bold;
+}

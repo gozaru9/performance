@@ -1,0 +1,54 @@
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> tag
+                </div>
+                <div class="panel-body" ng-controller="TagsCtrl" ng-init="getAll()">
+                    
+                    <form name="tagsForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="タグ名を入力してください" ng-model="tagName" required>
+                        </div>
+                        <div class="form-group">
+                            <color-directive></color-directive>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="説明を入力してください" ng-model="description"/>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-success" ng-click="create(tagName, description)" ng-disabled="!tagsForm.$valid">登録する</button>
+                        </div>
+
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>タグ名</th>
+                                    <th>色</th>
+                                    <th>説明</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="tag in tagsList">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ tag.name }}</td>
+                                    <td><div class="color-box"><div style="background-color: #{{ tag.color }}"></div></div></td>
+                                    <td>{{ tag.description }}</td>
+                                    <td><button type="button" class="btn btn-default" data-toggle="modal"
+                                        ng-click="popupView(tag._id, $index)">update</button></td>
+                                    <td><button type="button" class="btn btn-default" ng-click="delete(tag._id, $index)">delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel='stylesheet' href="js/vendor/colorpicker/css/colorpicker.css" rel="stylesheet">
+    <script type="text/javascript" src="js/vendor/colorpicker/js/colorpicker.js"></script>
