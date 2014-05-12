@@ -10,7 +10,7 @@ var servicesPath = basePath+"services/";
 var pathMap = [
     {"fileName": "controllers", "path": controllersPath}, 
     {"fileName": "services", "path": servicesPath},
-    {"fileName": "directives", "path": directivesPath},
+//    {"fileName": "directives", "path": directivesPath},
     ];
 
 var app = [{"app.js": "app.min.js"}];
@@ -23,7 +23,7 @@ outputFile.write(result.code);
 
 var fs = require('fs');
 
-
+/*
 async.forEach(pathMap, function(map) {
     
     fs.readdir(map.path, function(err, files){
@@ -45,8 +45,7 @@ async.forEach(pathMap, function(map) {
         outputFile.write(result.code);
     });
 });
-    
-/*
+    */
 async.forEach(pathMap, function(map) {
     
     fs.readdir(map.path, function(err, files){
@@ -71,5 +70,4 @@ async.forEach(pathMap, function(map) {
         }
     });
 });
-*/
 
