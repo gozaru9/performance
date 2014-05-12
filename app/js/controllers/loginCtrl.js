@@ -1,5 +1,5 @@
-var myApp = angular.module('myApp',['AuthServices']);
-myApp.controller('LoginCtrl', ['$scope', 'Auth', 'Utility',
+var loginCtrl = angular.module('loginCtrl',['AuthServices']);
+loginCtrl.controller('LoginCtrl', ['$scope', 'Auth', 'Utility',
     function($scope, Auth, Utility, Modal) {
     
     $scope.data = {mailAddress:'', password:'', remember:false};

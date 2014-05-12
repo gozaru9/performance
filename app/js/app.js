@@ -1,11 +1,15 @@
 var app = angular.module('myApp', ['ngResource', 'ngRoute', 'ui.bootstrap', 
-    'usersCtrl', 'usersListCtrl','skillsCtrl', 'organizationsCtrl', 'postsCtrl', 'tagsCtrl', 'ranksCtrl',
+    'usersCtrl', 'usersListCtrl','skillsCtrl', 'organizationsCtrl', 'postsCtrl', 'tagsCtrl', 'ranksCtrl', 'loginCtrl',
     'projectsCtrl','teamsCtrl', 'profilesCtrl']
     ).config(function ($routeProvider) {
         // ルーティング設定
         $routeProvider
             .when('/', {
                 templateUrl: 'views/main.html',
+            })
+            .when('login', {
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl'
             })
             .when('/profile', {
                 templateUrl: 'views/myprofile.html',
