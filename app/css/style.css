@@ -175,10 +175,10 @@ i .collapse {
     text-align: left !important;
 }
 .check-horizon > div > span > input {
-    margin-right: 8px;
+    margin-right: 3px;
 }
 .check-horizon > div > input {
-    width: 60px !important;
+    width: 65px !important;
 }
 /*----------------------------------------------------------------------------*/
 /* box
