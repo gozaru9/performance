@@ -54,7 +54,6 @@ exports.getTeamAll = function(req, res) {
  */
 exports.createTeam = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     team.save(req.session._id, req.body, function(err, item) {
         
         var execute = true;
@@ -77,7 +76,6 @@ exports.createTeam = function(req, res) {
  */
 exports.copyTeam = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     team.copy(req.session._id, req.body, function(err, item) {
         
         var execute = true;
@@ -92,7 +90,7 @@ exports.copyTeam = function(req, res) {
 };
 
 /**
- * プロジェクトを更新する
+ * チームを更新する
  * 
  * @author niikawa
  * @param {Object} req 画面からのリクエスト
@@ -100,7 +98,6 @@ exports.copyTeam = function(req, res) {
  */
 exports.updateTeam = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     team.update(req.session._id, req.body, function(err, item) {
         
         var execute = true;
@@ -115,7 +112,7 @@ exports.updateTeam = function(req, res) {
 };
 
 /**
- * プロジェクトを削除する
+ * チームを削除する
  * 
  * @author niikawa
  * @param {Object} req 画面からのリクエスト

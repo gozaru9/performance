@@ -142,8 +142,6 @@ coreModel.prototype.isSameName = function(id, name, callback) {
     var target = this.db.model(this.modelName);
     var querty = (null === id) ? {name:name} : {$and: [{_id : { $ne : id} }, { name : name }]};
 
-//    Chat.find( {$and: [{'_id' : roomId}, {"users._id" : { $in:[id] }} ] }, function(err, room) {
-    
     target.findOne( querty ,function(err, item){
         
         if (null === item) {

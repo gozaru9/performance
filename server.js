@@ -48,8 +48,10 @@ app.use(express.session({
     }
 }));
 //全てのリクエストを処理する前にログイン済みかのチェックを行う
-/*app.use(function(req, res, next){
+/*
+app.use(function(req, res, next){
     console.log('login check');
+        console.log(req.session);
     if (req.session.isLogin) {
         console.log('next');
         next();
@@ -83,7 +85,7 @@ app.all('/*', function(req, res, next) {
  *ルーティングの定義
  */
 var routes = require('./routes');
-//app.get('/', routes.index);
+app.get('/', routes.index);
 app.get('/login', routes.login);
 //app.get('/logout', routes.logout);
 
@@ -91,16 +93,18 @@ app.get('/login', routes.login);
  * API
  */
 //-----------------------------------------------------------------------------
-//member
+//login
 //-----------------------------------------------------------------------------
 var auth = require('./api/login');
 app.post('/api/login', auth.login);
+app.post('/api/isLogin', auth.isLogin);
 
 //-----------------------------------------------------------------------------
 //member
 //-----------------------------------------------------------------------------
 var users = require('./api/users');
 app.get('/api/users/keywords/:q', users.query);
+app.get('/api/users/skills', users.getSkill);
 app.get('/api/users/:id', users.getById);
 app.get('/api/users', users.getUser);
 app.post('/api/users', users.create);
@@ -113,7 +117,6 @@ app.delete('/api/users?:id', users.delete);
 var skill = require('./api/skill');
 //skill category
 app.get('/api/skillCategory', skill.getCategoryAll);
-app.get('/api/skillCategory?:id', skill.getCategoryById);
 app.post('/api/skillCategory', skill.createCategory);
 app.post('/api/skillCategory/:id', skill.updateCategory);
 app.delete('/api/skillCategory?:id', skill.deleteCategory);

@@ -38,7 +38,6 @@ exports.getOrganizationAll = function(req, res) {
  */
 exports.createOrganization = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     organization.isSameName(null, req.body.name, function(isSame, message, itemList) {
         
         var execute = true;
@@ -71,7 +70,6 @@ exports.createOrganization = function(req, res) {
  */
 exports.updateOrganization = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     organization.isSameName(req.body._id, req.body.name, function(isSame, message, itemList) {
         
         var execute = true;

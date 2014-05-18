@@ -3,6 +3,8 @@ var userModel = require('../model/userModel');
 var User = new userModel();
 var logger = require('../util/logger');
 var messages = require('../config/messages.js');
+var skillModel = require('../model/skillModel');
+var Skill = new skillModel();
 
 /**
  * ユーザーを取得する 
@@ -126,7 +128,7 @@ exports.create = function(req, res){
             
         } else {
             
-            User.save('52d3e341e086ad0000000002', req.body, function(err, item) {
+            User.save(req.session._id, req.body, function(err, item) {
                 
                 if (err) {
                     logger.appError(err);
@@ -149,10 +151,84 @@ exports.create = function(req, res){
  */
 exports.update = function(req, res) {
     
-    
-    
+    User.isSameUser(req.body, function(item) {
+        
+        var execute = true;
+        var message = '';
+        if (item.isSame) {
+            
+            if (1 === item.type) {
+                
+                message = messages.UER_ERR_001;
+                
+            } else if (2 === item.type) {
+                
+                message = messages.UER_ERR_002;
+            }
+            
+            res.json({status: !execute, message: message});
+            
+        } else {
+            
+            User.update(req.session._id, req.body, function(err, item) {
+                
+                if (err) {
+                    logger.appError(err);
+                    message = messages.COM_ERR_003;
+                    execute = false;
+                }
+                res.json({status: execute, message:message, item: item});
+                
+            });
+        }
+    });
 };
 
+/**
+ * ユーザーを削除する
+ * 
+ * @author niikawa
+ * @param {Object} req 画面からのリクエスト
+ * @param {Object} res 画面へのレスポンス
+ */
 exports.delete = function(req, res){
   res.json({title: 'delete'});
 };
+
+/**
+ * ユーザーのスキルを取得する
+ * 
+ * @author niikawa
+ * @param {Object} req 画面からのリクエスト
+ * @param {Object} res 画面へのレスポンス
+ */
+exports.getSkill = function(req, res) {
+    
+    async.parallel(
+        [function(callback) {
+            //items[0]
+            Skill.getSkillsBeloginToCategory(callback);
+        },
+        function(callback) {
+            //items[1]
+            User.getById(req.session._id, callback);
+        }],
+        function(err, items) {
+            
+            var execute = true;
+            var message = '';
+            if (err) {
+                execute = false;
+                message = messages.COM_ERR_001;
+                logger.appError(err);
+            }
+            
+            //スキルのマッピングを行う
+            var user = items[1];
+            var returnObj = {user: user, skillList: items[0]};
+            
+            res.json({status: execute, message: message, items: returnObj});
+        }
+    );
+};
+

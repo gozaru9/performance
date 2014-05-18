@@ -69,9 +69,10 @@ usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'Organizati
     //初期化処理
     $scope.initialize = function() {
         
-        Datepicker.init($scope);
         var minYear = Utility.subtractYear(Utility.today(), 70).format('YYYY');
         var maxYear = Utility.today('YYYY');
+        $scope.minDate = new Date(Utility.subtractYear(Utility.today(), 70).format('YYYY-MM-DD'));
+        Datepicker.init($scope);
         $scope.yearList = Utility.createYearList(minYear , maxYear);
         $scope.monthList = Utility.createMonthList();
         $scope.dayList = Utility.createDayList(Utility.dayInMonth());

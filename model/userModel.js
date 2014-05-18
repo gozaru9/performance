@@ -62,10 +62,13 @@ var usersSchema = new mongoose.Schema({
   city: {type: String},
   address: {type: String},
   entryDate: {type: Date, default: Date.now},
-  LeavingDate: {type: Date},
+  leavingDate: {type: Date},
   keywords: {type: String},
   tags:[{ type: mongoose.Schema.Types.ObjectId, ref: 'tags' , default: null}],
-  teams:[{ type: mongoose.Schema.Types.ObjectId, ref: 'teams', default: null }]
+//  teams:[{ type: mongoose.Schema.Types.ObjectId, ref: 'teams', default: null }],
+  remembertkn:{type: String},
+  autoLoginId:{type: String},
+  
   //後で追加する
   //
   //role
@@ -193,8 +196,10 @@ userModel.prototype.getUserByCondition = function(condition, skip, limit, callba
  */
 userModel.prototype.isSameUser = function(data, callback) {
     
+    var query = { $or:[{'employeeNumber': data.employeeNumber} , {'mailAddress': data.mailAddress} ]};
+    if (null !== data.id) query.$and = [{_id : { $ne : data.id} }];
     var User = this.db.model(collection);
-    User.findOne( { $or:[{'employeeNumber': data.employeeNumber} , {'mailAddress': data.mailAddress} ]}, function(err, item){
+    User.findOne(query, function(err, item){
         
         var result = {isSame:false, type: 0};
         if (null !== item) {
@@ -241,15 +246,67 @@ userModel.prototype.save = function(id, data, callback) {
 };
 
 /**
- * ユーザーを更新する
+ * マスタ画面からユーザーを更新する
  * 
  * @method update
  * @author niikawa
  * @param {object} data data.userid + collection member
  * @param {Funtion} callback
  */
-userModel.prototype.update = function(data, callback) {
+userModel.prototype.update = function(id, data, callback) {
     
+    var User = this.db.model(collection);
+    User.findOne({_id:data.id},function(err, target){
+        
+        if(err || target === null) {
+            
+            callback('対象が見つかりません');
+            
+        } else {
+            
+            //呼び出し元画面から更新されない項目
+            data.tags = target.tags;
+            data.remembertkn = target.remembertkn;
+            data.autoLoginId = target.autoLoginId;
+            
+            target.updateBy = data.id;
+            target.updated = moment().format('YYYY-MM-DD HH:mm:ss');
+            target.employeeNumber = data.employeeNumber;
+            target.employeeType = data.employeeType;
+            target.organizations = data.organizations;
+            target.posts = data.posts;
+            target.ranks = data.ranks;
+            target.userImagePath = data.userImagePath;
+            target.firstName = data.firstName;
+            target.lastName = data.lastName;
+            target.firstNameKana = data.firstNameKana;
+            target.lastNameKana = data.lastNameKana;
+            target.mailAddress = data.mailAddress;
+            target.password = crypto.createHash('md5').update(data.password).digest("hex");
+            target.birth = data.birthYear + '-' + data.birthMonth + '-' + data.birthDay;
+            target.age = data.age;
+            target.sex = data.sex;
+            target.telNo = data.telFront + '-' + data.telCenter + '-' + data.telBack;
+            target.zip = data.zipFront + '-' + data.zipBack;
+            target.prefectures = data.prefectures;
+            target.city = data.city;
+            target.address = data.address;
+            target.entryDate = data.entryDate;
+            target.LeavingDate = data.LeavingDate;
+            target.tags = data.tags;
+            //かなを全角文字に変換しないとダメ
+            //キーワードを生成
+            target.keywords = 
+                data.lastName
+                +data.firstName
+                +data.lastNameKana
+                +data.firstNameKana
+                +data.mailAddress
+                +data.employeeNumber
+                ;
+            target.save(callback);
+        }
+    });
 };
 
 /**
@@ -287,10 +344,70 @@ userModel.prototype.passwordMatch = function(id, password, callback) {
  * 
  * @method updatePassword
  * @author niikawa
- * @param {Object} data data.userId data.targetId data.password
+ * @param {Object} data data.updatedId data.targetId data.password
  * @param {Funtion} callback
  */
 userModel.prototype.updatePassword = function(data, callback) {
     
+    var User = this.db.model(collection);
+    User.findOne({_id:data.targetId},function(err, target){
+        
+        if(err || target === null) {
+            
+            callback('対象が見つかりません');
+            
+        } else {
+            
+            target.updateBy = data.updatedId;
+            target.updated = moment().format('YYYY-MM-DD HH:mm:ss');
+            target.password = crypto.createHash('md5').update(data.password).digest("hex");
+            target.save(callback);
+        }
+    });
 };
+
+/**
+ * 自動ログイン
+ * 
+ * @method autoLogin
+ * @author niikawa
+ * @param {Object} data data.userId data.targetId data.password
+ * @param {Funtion} callback
+ */
+userModel.prototype.autoLogin = function(data, callback) {
+    
+//    var key = 
+    var User = this.db.model(collection);
+    
+};
+
+/**
+ * 自動ログイン用のトークンを更新する
+ * 
+ * @method updateRememberTkn
+ * @author niikawa
+ * @oaram {String} tkn
+ * @param {Funtion} callback
+ */
+userModel.prototype.updateRememberTkn = function(tkn, callback) {
+    
+    
+};
+
+/**
+ * 自動ログイン用のトークンを生成する
+ * 
+ * @method generateRememberTkn
+ * @author niikawa
+ * @return String
+ */
+function generateRememberTkn() {
+    
+//    moment
+    var tkn;
+    
+    return tkn;
+}
+
+
 module.exports = userModel;

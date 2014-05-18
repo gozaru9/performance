@@ -35,7 +35,6 @@ exports.getTagAll = function(req, res) {
  */
 exports.createTag = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     tag.isSameName(null, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
@@ -69,7 +68,6 @@ exports.createTag = function(req, res) {
  */
 exports.updateTag = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     tag.isSameName(req.body._id, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;

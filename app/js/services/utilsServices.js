@@ -99,7 +99,7 @@ utilsServices.service("Utility", function(){
     //momentオブジェクトを取得する
     this.moment = function() {
         return moment();
-    }
+    };
     //本日の日付けを文字列で取得する
     this.today = function(format) {
         var formatString = (null == format) ? 'YYYY-MM-DD' : format;

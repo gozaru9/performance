@@ -129,4 +129,50 @@ skillModel.prototype.update = function(id, data, callback) {
 };
 
 
+/**
+ * 全カテゴリと属したスキルを取得する
+ * 
+ * @method getSkillsBeloginToCategory
+ * @author niikawa
+ * @param {Object} req 画面からのリクエスト
+ * @param {Object} res 画面へのレスポンス
+ */
+skillModel.prototype.getSkillsBeloginToCategory = function(callback) {
+    
+    var Skill = this.db.model(collection);
+    Skill.aggregate( [ {$group: { _id : "$category"} }, {$sort: {_id: 1} }], function(err, categories) {
+        
+        var list = [];
+        Skill.find({}).sort({_id: 1, category: 1}).populate('category').exec(function(err, skills) {
+            
+            var categoryNum = categories.length;
+            var sIndex = 0;
+            var skillNum = skills.length;
+            for (var cIndex=0; cIndex < categoryNum; cIndex++) {
+                
+                var skillList = [];
+                var cId = String(categories[cIndex]._id);
+                for (sIndex; sIndex < skillNum; sIndex++) {
+                    
+                    var sId = String(skills[sIndex].category._id);
+                    if (cId !== sId) {
+                        
+                        break;
+                    }
+                    skillList.push({_id: skills[sIndex]._id, name: skills[sIndex].name});
+                }
+                var category = skills[sIndex-1].category;
+                list.push(
+                    { 
+                        category: {_id: category._id, name:category.name}, 
+                        skills: skillList
+                    }
+                );
+            }
+            callback(null, list);
+        });
+    });
+    
+};
+
 module.exports = skillModel;

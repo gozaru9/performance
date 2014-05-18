@@ -8,6 +8,10 @@ uesrServices.factory("User", ['$resource',
                 
                 return $resource('api/users/keywords/:q', {'q': '@q'});
                 
+            } else if (type === 'skill') {
+            
+                return $resource('api/users/skills');
+                
             } else {
                 
                 return $resource('api/users/:id', {'id': '@id'});

@@ -4,6 +4,7 @@ var user = new userModel();
 
 exports.index = function(req, res){
     
+    res.render('index', {});
 };
 
 

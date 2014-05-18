@@ -35,7 +35,6 @@ exports.getRankAll = function(req, res) {
  */
 exports.createRank = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     rank.isSameName(null, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
@@ -69,7 +68,6 @@ exports.createRank = function(req, res) {
  */
 exports.updateRank = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     rank.isSameName(req.body._id, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;

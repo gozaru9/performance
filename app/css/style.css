@@ -163,7 +163,23 @@ i .collapse {
   direction: ltr;
   cursor: pointer;
 }
-
+/*----------------------------------------------------------------------------*/
+/* check box 横並び
+/*----------------------------------------------------------------------------*/
+.check-horizon {
+    display:inline-block;
+    width: 198px;
+}
+.check-horizon > div > span {
+    width: 120px !important;
+    text-align: left !important;
+}
+.check-horizon > div > span > input {
+    margin-right: 8px;
+}
+.check-horizon > div > input {
+    width: 60px !important;
+}
 /*----------------------------------------------------------------------------*/
 /* box
 /*----------------------------------------------------------------------------*/

@@ -130,13 +130,13 @@
                     
                     <!-- 郵便番号 -->
                     <div class="form-group">
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" tooltip="郵便番号上3桁を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="text" name="zipFront" class="form-control" placeholder="郵便番号"
                                 tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-model="data.zipFront" autocomplete="off" 
                                 ng-minlength="3" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/" required>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" tooltip="郵便番号下4桁を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="text" name="zipBack" class="form-control" placeholder="郵便番号"
                                 tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-model="data.zipBack" autocomplete="off" 
@@ -148,8 +148,8 @@
                     </div>
                     <!-- 都道府県 -->
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            <select class="form-control" ng-change="getAge()" ng-model="data.prefectures" 
+                        <div class="col-sm-12" tooltip="都道府県を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <select class="form-control" ng-model="data.prefectures" 
                                 ng-options="prefectures.value as prefectures.text for prefectures in prefecturesList" required>
                             <option value="">-----</option>
                             </select>
@@ -158,7 +158,7 @@
                     
                     <!-- 市区群町村 -->
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" tooltip="市区群町村を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="text" name="city" class="form-control" placeholder="市区群町村を入力してください"
                                 tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-model="data.city" autocomplete="off" required>
@@ -166,7 +166,7 @@
                     </div>
                     <!-- 番地/ﾏﾝｼｮﾝ名 -->
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" tooltip="番地/ﾏﾝｼｮﾝ名を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="text" name="address" class="form-control" placeholder="番地/ﾏﾝｼｮﾝ名を入力してください"
                                 tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-model="data.address" autocomplete="off" required>
@@ -175,7 +175,7 @@
                     
                     <!-- メールアドレス -->
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" tooltip="メールアドレスを入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="email" name="mailaddress" class="form-control" placeholder="メールアドレスを入力してください"
                                 tooltip="メールアドレスを入力してください" tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-model="data.mailAddress" autocomplete="off" required>
@@ -184,7 +184,7 @@
                     
                     <!-- パスワード -->
                     <div class="form-group">
-                        <div class="col-sm-7">
+                        <div class="col-sm-7" tooltip="パスワードを入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="password" name="password" class="form-control" placeholder="パスワードを入力してください" 
                                 tooltip="パスワードを入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-minlength="8" ng-show="!showPassword" ng-model="data.password" required>
@@ -198,7 +198,7 @@
                     </div>
                     <!-- パスワード確認用 -->
                     <div class="form-group">
-                        <div class="col-sm-7">
+                        <div class="col-sm-7" tooltip="もう一度パスワードを入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="password" name="passwordConfirm" class="form-control" placeholder="確認用パスワードを入力してください" 
                                 tooltip="パスワードを入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-show="!showPasswordConf" ng-model="data.passwordConfirm" match="data.password" required>
@@ -206,7 +206,7 @@
                                 tooltip="パスワードを入力してください" tooltip-trigger="focus" tooltip-placement="bottom"
                                 ng-show="showPasswordConf" 
                                 ng-model="data.passwordConfirm" match="data.password" required>
-                            <span class="text-danger" ng-show="createForm.passwordConfirm.$error.mismatch">正しいメールアドレスを入力して下さい</span>
+                            <span class="text-danger" ng-show="createForm.passwordConfirm.$error.mismatch">パスワードが一致しません</span>
                         </div>
                         <div class="col-sm-5">
                             <div class="btn-group">
@@ -219,10 +219,10 @@
                     
                     <!-- 社員番号 -->
                     <div class="form-group">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" tooltip="社員番号を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="text" class="form-control" placeholder="社員番号を入力してください"
                                 tooltip="社員番号を入力してください"  tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.employeeNumber" required>
+                                ng-model="data.employeeNumber">
                         </div>
                     </div>
                     

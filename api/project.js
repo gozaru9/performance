@@ -35,7 +35,6 @@ exports.getProjectAll = function(req, res) {
  */
 exports.createProject = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     project.isSameName(null, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
@@ -69,7 +68,6 @@ exports.createProject = function(req, res) {
  */
 exports.updateProject = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     project.isSameName(req.body._id, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;

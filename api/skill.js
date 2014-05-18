@@ -32,17 +32,6 @@ exports.getCategoryAll = function(req, res) {
 };
 
 /**
- * IDに合致したスキルカテゴリを取得する
- * 
- * @author niikawa
- * @param {Object} req 画面からのリクエスト
- * @param {Object} res 画面へのレスポンス
- */
-exports.getCategoryById = function(req, res) {
-    
-};
-
-/**
  * スキルカテゴリを作成する
  * 
  * @author niikawa
@@ -50,8 +39,6 @@ exports.getCategoryById = function(req, res) {
  * @param {Object} res 画面へのレスポンス
  */
 exports.createCategory = function(req, res) {
-    
-    req.session._id = '5355cea82648d6000066e442';
     
     skillCategory.isSameName(null, req.body.name, function(isSame, err, itemList) {
         
@@ -118,8 +105,6 @@ exports.deleteCategory = function(req, res) {
  */
 exports.updateCategory = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
-
     skillCategory.isSameName(req.body._id, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
@@ -199,8 +184,6 @@ exports.getByCategoryId = function(req, res) {
  */
 exports.skillCreate = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
-    
     skill.isSameName(null, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
@@ -254,8 +237,6 @@ exports.skillDelete = function(req, res) {
  */
 exports.skillUpdate = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
-
     skill.isSameName(req.body.id, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;

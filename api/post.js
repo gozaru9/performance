@@ -40,7 +40,6 @@ exports.getPostAll = function(req, res) {
  */
 exports.createPost = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     post.isSameName(null, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
@@ -74,7 +73,6 @@ exports.createPost = function(req, res) {
  */
 exports.updatePost = function(req, res) {
     
-    req.session._id = '5355cea82648d6000066e442';
     post.isSameName(req.body._id, req.body.name, function(isSame, err, itemList) {
         
         var execute = true;
