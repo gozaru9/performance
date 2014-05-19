@@ -39,6 +39,12 @@ profilesCtrl.controller('ProfilesSkillsCtrl', ['$scope', 'User', 'Utility', 'Mod
         $scope.skillList[parent].skills[child].numberOfYear = 0;
     };
     
+    $scope.setNumberOfyear = function(parent, child, elem) {
+
+        console.log(parent);
+        console.log(child);
+        console.log(elem);
+    };
     
     $scope.submit = function() {
         
