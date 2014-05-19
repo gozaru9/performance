@@ -3,14 +3,17 @@
             <!-- Skills Section -->
             <div class="tab-pane" id="Skills">
             <form name="profilesSkillForm" ng-submit="submit()" class="form-horizontal css-form" novalidate>
+            
+                <button class="btn btn-success">登録する</button>
+            
                 <div ng-repeat="skill in skillList">
                     <h3 class="sub-header">{{ skill.category.name }}</h3>
                     <div class="check-horizon" ng-repeat="skills in skill.skills">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox">{{skills.name}}
+                                <input type="checkbox" ng-model="data.skillCheckList[$index]" value="{{skills._id}}">{{skills.name}}
                             </span>
-                            <input type="number" class="form-control" value="" max="99"
+                            <input type="number" class="form-control" value="" max="99" min="0" ng-model="data.skillSetList[$index]"
                                 tooltip="経験年数を入力してください" tooltip-trigger="mouseenter" tooltip-placement="bottom">
                         </div>
                     </div>
