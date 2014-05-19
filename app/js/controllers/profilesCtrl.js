@@ -35,8 +35,10 @@ profilesCtrl.controller('ProfilesSkillsCtrl', ['$scope', 'User', 'Utility', 'Mod
     
     $scope.isDisabled = function(parent, child) {
         
-        $scope.skillList[parent].skills[child].disabled = !$scope.skillList[parent].skills[child].disabled; 
+        $scope.skillList[parent].skills[child].disabled = !$scope.skillList[parent].skills[child].disabled;
+        $scope.skillList[parent].skills[child].numberOfYear = 0;
     };
+    
     
     $scope.submit = function() {
         
