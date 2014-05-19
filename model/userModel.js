@@ -66,12 +66,14 @@ var usersSchema = new mongoose.Schema({
   keywords: {type: String},
   tags:[{ type: mongoose.Schema.Types.ObjectId, ref: 'tags' , default: null}],
 //  teams:[{ type: mongoose.Schema.Types.ObjectId, ref: 'teams', default: null }],
+  skills: {type: Array},
   remembertkn:{type: String},
   autoLoginId:{type: String},
   
   //後で追加する
   //
   //role
+  //skills
   
 });
 

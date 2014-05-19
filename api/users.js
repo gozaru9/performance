@@ -225,8 +225,24 @@ exports.getSkill = function(req, res) {
             
             //スキルのマッピングを行う
             var user = items[1];
-            var returnObj = {user: user, skillList: items[0]};
             
+            var skillList = items[0];
+            for (var parent=0; parent < skillList.length; parent++)
+            {
+                for (var child=0; child < skillList[parent].skills.length; child++)
+                {
+                    //ユーザーが該当スキルを持っているか判定し画面描画の表示制御用の要素を追加する必要がある
+                    if (!user.skills[skillList[parent].skills[child]._id]) {
+                        
+                        skillList[parent].skills[child].disabled = true;
+                    } else {
+                        
+                        skillList[parent].skills[child].disabled = false;
+                    }
+                    
+                }
+            }
+            var returnObj = {user: user, skillList: items[0]};
             res.json({status: execute, message: message, items: returnObj});
         }
     );
