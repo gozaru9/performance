@@ -17,8 +17,6 @@ profilesCtrl.controller('ProfilesSkillsCtrl', ['$scope', 'User', 'Utility', 'Mod
         
         $scope.tabStatus = {skills: true};
         $scope.skillList = [];
-        $scope.skillCheckList = [];
-        $scope.skillSetList = [];
         User.getResource('skill').get({}, function(data) {
             
             if (data.status) {
@@ -35,10 +33,14 @@ profilesCtrl.controller('ProfilesSkillsCtrl', ['$scope', 'User', 'Utility', 'Mod
         
     };
     
+    $scope.isDisabled = function(parent, child) {
+        
+        $scope.skillList[parent].skills[child].disabled = !$scope.skillList[parent].skills[child].disabled; 
+    };
+    
     $scope.submit = function() {
         
-        console.log($scope.skillCheckList);
-        console.log($scope.skillSetList);
+        console.log($scope.skillList);
     };
     
 }]);

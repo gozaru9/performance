@@ -11,9 +11,10 @@
                     <div class="check-horizon" ng-repeat="skills in skill.skills">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox" ng-model="data.skillCheckList[$index]" value="{{skills._id}}">{{skills.name}}
+                                <input type="checkbox" ng-click="isDisabled($parent.$index, $index)" value="{{skills._id}}">{{skills.name}}
                             </span>
-                            <input type="number" class="form-control" value="" max="99" min="0" ng-model="data.skillSetList[$index]"
+                            <input type="number" class="form-control" value="" max="99" min="0" value="skills.numberofYear" ng-disabled="skills.disabled"
+                                ng-model="$parent[$parent.$index].skills[$index].numberofYear"
                                 tooltip="経験年数を入力してください" tooltip-trigger="mouseenter" tooltip-placement="bottom">
                         </div>
                     </div>
