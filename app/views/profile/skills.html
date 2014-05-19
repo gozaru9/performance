@@ -14,8 +14,7 @@
                                 <input type="checkbox" ng-click="isDisabled($parent.$index, $index)" value="{{skills._id}}">{{skills.name}}
                             </span>
                             <input type="number" class="form-control" value="" max="99" min="0" value="{{skills.numberofYear}}" ng-disabled="{{skills.disabled}}"
-                                ng-change="setNumberOfyear($parent.$index, $index)"
-                                >
+                                tooltip="経験年数を入力してください" tooltip-trigger="mouseenter" tooltip-placement="bottom">
                         </div>
                     </div>
                 </div>
