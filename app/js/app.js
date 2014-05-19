@@ -1,6 +1,6 @@
 var app = angular.module('myApp', ['ngResource', 'ngRoute', 'ngCookies','ui.bootstrap',
     'usersCtrl', 'usersListCtrl','skillsCtrl', 'organizationsCtrl', 'postsCtrl', 'tagsCtrl', 'ranksCtrl', 'loginCtrl',
-    'projectsCtrl','teamsCtrl', 'profilesCtrl']);
+    'projectsCtrl','teamsCtrl', 'profilesCtrl', 'authorityCtrl']);
     
 app.config(function ($routeProvider) {
 
@@ -119,6 +119,22 @@ app.config(function ($routeProvider) {
         .when('/project/team/:id', {
             templateUrl: 'views/project/team.html',
             controller: 'TeamsCtrl',
+            resolve: {isLogin: autoCheck}
+        })
+        //Authority
+        .when('/authority/roll', {
+            templateUrl: 'views/authority/roll.html',
+            controller: 'AuthorityCtrl',
+            resolve: {isLogin: autoCheck}
+        })
+        .when('/authority/roll/:id', {
+            templateUrl: 'views/authority/roll.html',
+            controller: 'AuthorityCtrl',
+            resolve: {isLogin: autoCheck}
+        })
+        .when('/authority/set', {
+            templateUrl: 'views/authority/set.html',
+            controller: 'AuthorityCtrl',
             resolve: {isLogin: autoCheck}
         })
         .otherwise({

@@ -1,0 +1,52 @@
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> organizations
+                </div>
+                <div class="panel-body" ng-controller="OrganizationsCtrl" ng-init="getAll()">
+                    <form name="organizationsForm">
+                        <div class="form-group input-group">
+                            <input type="text" class="form-control" placeholder="組織名" ng-model="organizationName" required>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="create(organizationName)" ng-disabled="!organizationsForm.$valid">作成する</button>
+                            </span>
+                        </div>
+                    </form>
+            
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>組織名</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="organization in organizationList">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ organization.name }}</td>
+                                    <td><button type="button" class="btn btn-default" data-toggle="modal"
+                                        ng-click="popupView(organization._id, $index)">update</button></td>
+                                    <td><button type="button" class="btn btn-default" ng-click="delete(organization._id, $index)">delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- 組織階層化エリア -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> organizations
+                </div>
+                <div class="panel-body" >
+                    <div class="alert alert-danger">組織階層化エリア</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="js/vendor/nestable/nestable.css" rel="stylesheet">
+    <script src="js/vendor/nestable/jquery.nestable.js"></script>
