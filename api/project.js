@@ -110,3 +110,16 @@ exports.deleteProject = function(req, res) {
         res.json({status: execute});
     });
 };
+
+/**
+ *自分の属するプロジェクトを取得する
+ * 
+ * @author niikawa
+ * @param {Object} req 画面からのリクエスト
+ * @param {Object} res 画面へのレスポンス
+ */
+exports.myProject = function(req, res) {
+
+        res.json({status: true});
+};
+
