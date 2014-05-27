@@ -105,6 +105,7 @@ app.post('/api/isLogin', auth.isLogin);
 var users = require('./api/users');
 app.get('/api/users/keywords/:q', users.query);
 app.get('/api/users/skills', users.getSkill);
+app.post('/api/users/skills', users.setSkill);
 app.get('/api/users/:id', users.getById);
 app.get('/api/users', users.getUser);
 app.post('/api/users', users.create);
@@ -122,7 +123,7 @@ app.post('/api/skillCategory/:id', skill.updateCategory);
 app.delete('/api/skillCategory?:id', skill.deleteCategory);
 //skill
 app.get('/api/skill?:id', skill.getByCategoryId);
-//app.get('/api/skill', skill.getAll);
+app.get('/api/skill/belongto', skill.getSkillsBeloginToCategory);
 app.post('/api/skill', skill.skillCreate);
 app.post('/api/skill/:id', skill.skillUpdate);
 app.delete('/api/skill?:id', skill.skillDelete);

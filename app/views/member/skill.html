@@ -1,0 +1,46 @@
+    <div ng-controller="UsersSetSkillCtrl">
+        <div ng-show="announce">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> 
+                </div>
+                <div class="panel-body">
+                    <button class="btn btn-default" ng-click="announce = !announce">続けてスキルを設定する</button>
+                    <button class="btn btn-default" ng-click="finish()">終了する</button>
+                </div>
+            </div>
+        </div>
+        <div ng-show="!announce" ng-init="initialize()">
+        
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> 
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <div class="tab-pane" id="Skills">
+                        <form name="profilesSkillForm" ng-submit="submit()" class="form-horizontal css-form" novalidate>
+                        
+                            <button class="btn btn-lg btn-success bottom-fixed">設定する</button>
+
+                            <div ng-repeat="skill in skillList">
+                                <h3 class="sub-header">{{ skill.category.name }}</h3>
+                                <div class="check-horizon" ng-repeat="skills in skill.skills">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="skills.checked" ng-click="isDisabled($parent.$index, $index)">
+                                            {{skills.name}}
+                                        </span>
+                                        <input type="number" class="form-control" max="99" min="0" ng-disabled="!skills.checked" ng-model="skills.numberOfYear"
+                                            tooltip="経験年数を入力してください" tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    

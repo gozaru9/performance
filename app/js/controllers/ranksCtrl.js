@@ -5,7 +5,7 @@ ranksCtrl.controller('RanksCtrl', ['$scope', 'Rank', 'Utility', 'Modal' ,
     var resource = Rank.getResource();
     $scope.ranksList = [];
 
-    $scope.getAll = function() {
+    $scope.initialize = function() {
         
         resource.get({}, function(data){
             

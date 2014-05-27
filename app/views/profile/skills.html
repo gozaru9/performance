@@ -4,16 +4,17 @@
             <div class="tab-pane" id="Skills">
             <form name="profilesSkillForm" ng-submit="submit()" class="form-horizontal css-form" novalidate>
             
-                <button class="btn btn-success">登録する</button>
+                <button class="btn btn-lg btn-success bottom-fixed">設定する</button>
             
                 <div ng-repeat="skill in skillList">
                     <h3 class="sub-header">{{ skill.category.name }}</h3>
                     <div class="check-horizon" ng-repeat="skills in skill.skills">
                         <div class="input-group">
                             <span class="input-group-addon">
-                                <input type="checkbox" ng-click="isDisabled($parent.$index, $index)" value="{{skills._id}}">{{skills.name}}
+                                <input type="checkbox" ng-model="skills.checked" ng-click="isDisabled($parent.$index, $index)">
+                                {{skills.name}}
                             </span>
-                            <input type="number" class="form-control" value="" max="99" min="0" value="{{skills.numberofYear}}" ng-disabled="{{skills.disabled}}"
+                            <input type="number" class="form-control" max="99" min="0" ng-disabled="!skills.checked" ng-model="skills.numberOfYear"
                                 tooltip="経験年数を入力してください" tooltip-trigger="mouseenter" tooltip-placement="bottom">
                         </div>
                     </div>

@@ -6,6 +6,7 @@ teamServices.factory("Team", ['$resource',
             
             return $resource('api/team/:id', {'id': '@_id'});
         };
+        
         return {getResource: getResource};
     }
 ]);

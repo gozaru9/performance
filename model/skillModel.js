@@ -143,8 +143,8 @@ skillModel.prototype.getSkillsBeloginToCategory = function(callback) {
     Skill.aggregate( [ {$group: { _id : "$category"} }, {$sort: {_id: 1} }], function(err, categories) {
         
         var list = [];
-        Skill.find({}).sort({_id: 1, category: 1}).populate('category').exec(function(err, skills) {
-            
+        Skill.find({}, null, {sort:{'category': 1}}).populate('category').exec(function(err, skills) {
+
             var categoryNum = categories.length;
             var sIndex = 0;
             var skillNum = skills.length;
@@ -153,12 +153,12 @@ skillModel.prototype.getSkillsBeloginToCategory = function(callback) {
                 var skillList = [];
                 var cId = String(categories[cIndex]._id);
                 for (sIndex; sIndex < skillNum; sIndex++) {
-                    
                     var sId = String(skills[sIndex].category._id);
                     if (cId !== sId) {
                         
                         break;
                     }
+                    
                     skillList.push({_id: skills[sIndex]._id, name: skills[sIndex].name});
                 }
                 var category = skills[sIndex-1].category;

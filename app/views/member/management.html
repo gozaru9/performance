@@ -68,117 +68,12 @@
                                 ng-model="data.firstNameKana" required>
                         </div>
                     </div>
-                    <!-- 生年月日 -->
-                    <div class="form-group" tooltip="生年月日を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                        <div class="col-sm-3">
-                            <select class="form-control" ng-change="createOptions()" ng-model="data.birthYear" 
-                                ng-options="year.value as year.text for year in yearList" required>
-                            <option value="">-----</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-sm-2">
-                            <select class="form-control" ng-change="createOptions()" ng-model="data.birthMonth" 
-                                ng-options="month.value as month.text  for month in monthList" required>
-                            <option value="">-----</option>
-                            </select>
-                        </div>
-                        
-                        <div class="col-sm-2">
-                            <select class="form-control" ng-change="getAge()" ng-model="data.birthDay" 
-                                ng-options="day.value as day.text for day in dayList" required>
-                            <option value="">-----</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- 年齢 -->
-                    <div class="form-group">
-                        <div class="col-sm-10" ng-show="data.age">
-                            年齢は{{data.age}}歳です
-                        </div>
-                    </div>
-                    <!-- 性別 -->
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <div class="btn-group" tooltip="性別を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                                <button type="button" class="btn btn-default" ng-model="data.sex" btn-radio="'1'">男</button>
-                                <button type="button" class="btn btn-default" ng-model="data.sex" btn-radio="'2'">女</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 電話番号 -->
-                    <div class="form-group">
-                        <div class="col-sm-3">
-                            <input type="text" name="telFront" class="form-control" placeholder="電話番号"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.telFront" autocomplete="off" 
-                                ng-minlength="2" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/" required>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" name="telCenter" class="form-control" placeholder="電話番号"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.telCenter" autocomplete="off" 
-                                ng-minlength="3" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" name="telBack" class="form-control" placeholder="電話番号"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.telBack" autocomplete="off" 
-                                ng-minlength="2" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
-                        </div>
-                    </div>
-                    
-                    <!-- 郵便番号 -->
-                    <div class="form-group">
-                        <div class="col-sm-3" tooltip="郵便番号上3桁を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                            <input type="text" name="zipFront" class="form-control" placeholder="郵便番号"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.zipFront" autocomplete="off" 
-                                ng-minlength="3" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/" required>
-                        </div>
-                        <div class="col-sm-2" tooltip="郵便番号下4桁を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                            <input type="text" name="zipBack" class="form-control" placeholder="郵便番号"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.zipBack" autocomplete="off" 
-                                ng-minlength="4" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/" required>
-                        </div>
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn btn-primary" ng-disabled="!createForm.$valid">住所検索</button>
-                        </div>
-                    </div>
-                    <!-- 都道府県 -->
-                    <div class="form-group">
-                        <div class="col-sm-12" tooltip="都道府県を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                            <select class="form-control" ng-model="data.prefectures" 
-                                ng-options="prefectures.value as prefectures.text for prefectures in prefecturesList" required>
-                            <option value="">-----</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- 市区群町村 -->
-                    <div class="form-group">
-                        <div class="col-sm-12" tooltip="市区群町村を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                            <input type="text" name="city" class="form-control" placeholder="市区群町村を入力してください"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.city" autocomplete="off" required>
-                        </div>
-                    </div>
-                    <!-- 番地/ﾏﾝｼｮﾝ名 -->
-                    <div class="form-group">
-                        <div class="col-sm-12" tooltip="番地/ﾏﾝｼｮﾝ名を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
-                            <input type="text" name="address" class="form-control" placeholder="番地/ﾏﾝｼｮﾝ名を入力してください"
-                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.address" autocomplete="off" required>
-                        </div>
-                    </div>
-                    
                     <!-- メールアドレス -->
                     <div class="form-group">
                         <div class="col-sm-12" tooltip="メールアドレスを入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
                             <input type="email" name="mailaddress" class="form-control" placeholder="メールアドレスを入力してください"
                                 tooltip="メールアドレスを入力してください" tooltip-trigger="focus" tooltip-placement="bottom"
-                                ng-model="data.mailAddress" autocomplete="off" required>
+                                ng-model="data.mailAddress" autocomplete="off" >
                         </div>
                     </div>
                     
@@ -215,6 +110,111 @@
                         </div>
                     </div>
 
+                    <!-- 生年月日 -->
+                    <div class="form-group" tooltip="生年月日を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                        <div class="col-sm-3">
+                            <select class="form-control" ng-change="createOptions()" ng-model="data.birthYear" 
+                                ng-options="year.value as year.text for year in yearList">
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-sm-2">
+                            <select class="form-control" ng-change="createOptions()" ng-model="data.birthMonth" 
+                                ng-options="month.value as month.text  for month in monthList">
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-sm-2">
+                            <select class="form-control" ng-change="getAge()" ng-model="data.birthDay" 
+                                ng-options="day.value as day.text for day in dayList">
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- 年齢 -->
+                    <div class="form-group">
+                        <div class="col-sm-10" ng-show="data.age">
+                            年齢は{{data.age}}歳です
+                        </div>
+                    </div>
+                    <!-- 性別 -->
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <div class="btn-group" tooltip="性別を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                                <button type="button" class="btn btn-default" ng-model="data.sex" btn-radio="'1'">男</button>
+                                <button type="button" class="btn btn-default" ng-model="data.sex" btn-radio="'2'">女</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 電話番号 -->
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <input type="text" name="telFront" class="form-control" placeholder="電話番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.telFront" autocomplete="off" 
+                                ng-minlength="2" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="telCenter" class="form-control" placeholder="電話番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.telCenter" autocomplete="off" 
+                                ng-minlength="3" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="telBack" class="form-control" placeholder="電話番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.telBack" autocomplete="off" 
+                                ng-minlength="2" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/">
+                        </div>
+                    </div>
+                    
+                    <!-- 郵便番号 -->
+                    <div class="form-group">
+                        <div class="col-sm-3" tooltip="郵便番号上3桁を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <input type="text" name="zipFront" class="form-control" placeholder="郵便番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.zipFront" autocomplete="off" 
+                                ng-minlength="3" ng-maxlength="3" ng-pattern="/^[a-zA-Z0-9]*$/">
+                        </div>
+                        <div class="col-sm-2" tooltip="郵便番号下4桁を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <input type="text" name="zipBack" class="form-control" placeholder="郵便番号"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.zipBack" autocomplete="off" 
+                                ng-minlength="4" ng-maxlength="4" ng-pattern="/^[a-zA-Z0-9]*$/">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary" ng-disabled="!createForm.$valid">住所検索</button>
+                        </div>
+                    </div>
+                    <!-- 都道府県 -->
+                    <div class="form-group">
+                        <div class="col-sm-12" tooltip="都道府県を選択してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <select class="form-control" ng-model="data.prefectures" 
+                                ng-options="prefectures.value as prefectures.text for prefectures in prefecturesList">
+                            <option value="">-----</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- 市区群町村 -->
+                    <div class="form-group">
+                        <div class="col-sm-12" tooltip="市区群町村を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <input type="text" name="city" class="form-control" placeholder="市区群町村を入力してください"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.city" autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- 番地/ﾏﾝｼｮﾝ名 -->
+                    <div class="form-group">
+                        <div class="col-sm-12" tooltip="番地/ﾏﾝｼｮﾝ名を入力してください"  tooltip-trigger="mouseenter" tooltip-placement="bottom">
+                            <input type="text" name="address" class="form-control" placeholder="番地/ﾏﾝｼｮﾝ名を入力してください"
+                                tooltip="" tooltip-trigger="focus" tooltip-placement="bottom"
+                                ng-model="data.address" autocomplete="off" >
+                        </div>
+                    </div>
+                    
                     <hr>
                     
                     <!-- 社員番号 -->

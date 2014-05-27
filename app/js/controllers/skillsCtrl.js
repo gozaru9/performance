@@ -5,8 +5,8 @@ skillsCtrl.controller('SkillCategoryCtrl', ['$rootScope','$scope', 'SkillCategor
     $scope.skillCategory = SkillCategory;
     $scope.categoryList = [];
     //スキルカテゴリを取得 ng-initで設定
-    $scope.getAll = function() {
-        $scope.skillCategory.get({}, function(data){
+    $scope.initialize = function() {
+        $scope.skillCategory.getResource().get({}, function(data){
             
             if (data.status) {
                 
@@ -23,7 +23,8 @@ skillsCtrl.controller('SkillCategoryCtrl', ['$rootScope','$scope', 'SkillCategor
     
     $scope.create = function(categoryName) {
         
-        var category = new SkillCategory({name:categoryName});
+        var resource = SkillCategory.getResource();
+        var category = new resource({name:categoryName});
         category.$save(function(data) {
             
             $scope.categoryName = '';
@@ -56,7 +57,8 @@ skillsCtrl.controller('SkillCategoryCtrl', ['$rootScope','$scope', 'SkillCategor
     $scope.update = function(name) {
         
         //データの更新を行う
-        var category = new SkillCategory({_id:$scope.updateid, name:name});
+        var resource = SkillCategory.getResource();
+        var category = new resource({_id:$scope.updateid, name:name});
         category.$save(function(data) {
             
             if (data.status) {
@@ -76,7 +78,8 @@ skillsCtrl.controller('SkillCategoryCtrl', ['$rootScope','$scope', 'SkillCategor
 
     $scope.delete = function(id, index) {
         
-        $scope.skillCategory.remove({_id:id}, function(data){
+        var resource = SkillCategory.getResource();
+        resource.remove({_id:id}, function(data){
             
             if (data.status) {
 
@@ -110,7 +113,8 @@ skillsCtrl.controller('SkillsCtrl', ['$scope', 'Skill', 'Utility', 'Modal',
     //ng-changeに設定
     $scope.getSkill = function() {
         
-        $scope.skill.get({_id:$scope.selectCategory}, function(data){
+        var resource = Skill.getResource();
+        resource.get({_id:$scope.selectCategory}, function(data){
             
             if (data.status) {
                 
@@ -125,7 +129,8 @@ skillsCtrl.controller('SkillsCtrl', ['$scope', 'Skill', 'Utility', 'Modal',
 
     $scope.create = function(skillName) {
         
-        var skill = new Skill({category:$scope.selectCategory, name:skillName});
+        var resource = Skill.getResource();
+        var skill = new resource({category:$scope.selectCategory, name:skillName});
         skill.$save(function(data) {
             
             $scope.skillName = '';
@@ -156,7 +161,8 @@ skillsCtrl.controller('SkillsCtrl', ['$scope', 'Skill', 'Utility', 'Modal',
     $scope.update = function(name) {
 
         //データの更新を行う
-        var skill = new Skill({_id:$scope.updateid, name:name});
+        var resource = Skill.getResource();
+        var skill = new resource({_id:$scope.updateid, name:name});
         skill.$save(function(data) {
             
             if (data.status) {
@@ -176,7 +182,8 @@ skillsCtrl.controller('SkillsCtrl', ['$scope', 'Skill', 'Utility', 'Modal',
 
     $scope.delete = function(id, index) {
         
-        $scope.skill.remove({_id:id}, function(data){
+        var resource = Skill.getResource();
+        resource.remove({_id:id}, function(data){
             
             if (data.status) {
                 

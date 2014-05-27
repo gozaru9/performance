@@ -48,11 +48,87 @@ uesrServices.factory("User", ['$resource',
                 {value:'46', text:'鹿児島'},{value:'47', text:'沖縄'},
             ];
         };
+        
+        var createRadarChartData = function(targetList, userSkills) {
 
+            var radarChartData = [];
+            var categoryNum = targetList.length;
+            for (var cIndex=0; cIndex < categoryNum; cIndex++)
+            {
+                var skillNum = targetList[cIndex].skills.length;
+                //チャートのラベル部分を生成する
+                var labelList = [];
+                for (var sIndex=0; sIndex < skillNum; sIndex++)
+                {
+                    labelList.push(targetList[cIndex].skills[sIndex].name);
+                }
+                //該当する数値を設定する
+                var usersNum = userSkills.length;
+                var categoryId = targetList[cIndex].category._id;
+                var setData = [];
+                for (var uIndex = 0; uIndex < usersNum; uIndex++)
+                {
+                    var datalList = [];
+                    if (userSkills[uIndex] === void 0
+                    || userSkills[uIndex][categoryId] === void 0) {
+                        
+                        for (sIndex = 0; sIndex < skillNum; sIndex++) 
+                        {
+                            datalList.push(0);
+                        }
+
+                    } else {
+                        
+                        for (sIndex = 0; sIndex < skillNum; sIndex++) 
+                        {
+                            var targetSkillId = targetList[cIndex].skills[sIndex]._id;
+                            var value = userSkills[uIndex][categoryId][targetSkillId];
+                            datalList.push((value === void 0) ? 0 : value);
+                        }
+                    }
+                    setData.push(datalList);
+                }
+
+                radarChartData.push({label:labelList, data:setData});
+            }
+            return radarChartData;
+        };
+        
+        var createSkillSubmitInfo = function(skillList) {
+                
+            var skillData = {};
+            var parent = skillList.length;
+            var nameList = [];
+            for (var cIndex=0; cIndex < parent; cIndex++)
+            {
+                var categoryId = skillList[cIndex].category._id;
+                var skills = {};
+                var child = skillList[cIndex].skills.length;
+                for (var sIndex=0; sIndex < child; sIndex++)
+                {
+                    var item = skillList[cIndex].skills[sIndex];
+                    if (item.checked && item.numberOfYear)
+                    {
+                        skills[item._id] = item.numberOfYear;
+                        nameList.push(item.name);
+                    }
+                }
+                skillData[categoryId] = skills;
+            }
+            return { skillData: skillData, skillNameList: nameList};
+        };
+        
         return {
-                getResource:getResource, 
-                createBirth:createBirth, 
-                getPrefectures:getPrefectures,
+                getResource: getResource, 
+                createBirth: createBirth, 
+                getPrefectures: getPrefectures,
+                createRadarChartData: createRadarChartData,
+                createSkillSubmitInfo: createSkillSubmitInfo,
             };
     }
 ]);
+uesrServices.factory('SharedUserModel', function($scope){
+    
+    return {_id: '', name:''};
+});
+

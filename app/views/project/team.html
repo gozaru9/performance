@@ -1,8 +1,5 @@
     <div class="row">
         <div class="col-lg-12" >
-        
-            <div class="alert alert-danger">チームの総合値をどう出すかを考えないと。。。</div>
-            
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"></i> Team
@@ -116,6 +113,11 @@
                                 </span>
                                     
                             </div>
+                            <div class="row">
+                              <div class="col-md-6" ng-repeat="data in radarChartData">
+                                  <radar-chart chart-data="data"></radar-chart>
+                              </div>
+                            </div>
                             <hr>
                         </div>
 
@@ -148,8 +150,6 @@
                             </tbody>
                         </table>
                     </div>
-                
-                    
                 </div>
             </div>
         </div>

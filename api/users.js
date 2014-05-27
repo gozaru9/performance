@@ -128,7 +128,10 @@ exports.create = function(req, res){
             
         } else {
             
-            User.save(req.session._id, req.body, function(err, item) {
+            var data = req.body;
+            data.skills = {};
+            data.tags = {};
+            User.save(req.session._id, data, function(err, item) {
                 
                 if (err) {
                     logger.appError(err);
@@ -211,7 +214,8 @@ exports.getSkill = function(req, res) {
         },
         function(callback) {
             //items[1]
-            User.getById(req.session._id, callback);
+            var targetId = req.query.id === void 0 ? req.session._id: req.query.id;
+            User.getById(targetId, callback);
         }],
         function(err, items) {
             
@@ -225,26 +229,64 @@ exports.getSkill = function(req, res) {
             
             //スキルのマッピングを行う
             var user = items[1];
-            
             var skillList = items[0];
+            
             for (var parent=0; parent < skillList.length; parent++)
             {
-                for (var child=0; child < skillList[parent].skills.length; child++)
-                {
-                    //ユーザーが該当スキルを持っているか判定し画面描画の表示制御用の要素を追加する必要がある
-                    if (!user.skills[skillList[parent].skills[child]._id]) {
+                var categoyId = skillList[parent].category._id;
+                //該当するスキルカテゴリを持たない場合
+                if (user.skills[categoyId] === void 0 || user.skills[categoyId].length === 0) {
                         
-                        skillList[parent].skills[child].disabled = true;
-                    } else {
-                        
-                        skillList[parent].skills[child].disabled = false;
+                    for (var i=0; i < skillList[parent].skills.length; i++)
+                    {                        
+                        skillList[parent].skills[i].checked = false;
+                        skillList[parent].skills[i].numberOfYear = 0;
                     }
                     
+                } else {
+                    
+                    //ユーザーが該当スキルを持っているか判定し画面描画の表示制御用の要素を追加する
+                    var settingSkill = user.skills[categoyId];
+                    for (var j=0; j < skillList[parent].skills.length; j++)
+                    {
+                        var skillId = skillList[parent].skills[j]._id;
+                        if (settingSkill[skillId]) {
+                            
+                            skillList[parent].skills[j].checked = true;
+                            skillList[parent].skills[j].numberOfYear = settingSkill[skillId];
+
+                        } else {
+                            
+                            skillList[parent].skills[j].checked = false;
+                            skillList[parent].skills[j].numberOfYear = 0;
+                        }
+                    }
                 }
             }
-            var returnObj = {user: user, skillList: items[0]};
+            var returnObj = {user: user, skillList: skillList};
             res.json({status: execute, message: message, items: returnObj});
         }
     );
 };
 
+/**
+ * ユーザーのスキルをセットする
+ * 
+ * @author niikawa
+ * @param {Object} req 画面からのリクエスト
+ * @param {Object} res 画面へのレスポンス
+ */
+exports.setSkill = function(req, res) {
+    
+    User.setSkill(req.session._id, req.body, function(err, item){
+        
+        var execute = true;
+        var message = messages.COM_INFO_002;
+        if (err) {
+            execute = false;
+            message = messages.COM_ERR_003;
+            logger.appError(err);
+        }
+        res.json({status: execute, message: message, items: item});
+    });
+};

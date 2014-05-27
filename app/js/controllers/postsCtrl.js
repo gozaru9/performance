@@ -5,7 +5,7 @@ postsCtrl.controller('PostsCtrl', ['$scope', 'PostsType', 'Utility', 'Modal' ,
     var resource = PostsType.getResource();
     $scope.postsList = [];
 
-    $scope.getAll = function() {
+    $scope.initialize = function() {
         
         resource.get({}, function(data){
             

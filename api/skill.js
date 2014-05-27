@@ -259,3 +259,25 @@ exports.skillUpdate = function(req, res) {
         }
     });
 };
+
+/**
+ * カテゴリと属するスキルを取得する
+ * 
+ * @author niikawa
+ * @param {Object} req 画面からのリクエスト
+ * @param {Object} res 画面へのレスポンス
+ */
+exports.getSkillsBeloginToCategory = function(req, res) {
+    
+    skill.getSkillsBeloginToCategory(function(err, items) {
+        
+        var execute = true;
+        var message = '';
+        if (err) {
+            logger.appError(err);
+            message = messages.COM_ERR_001;
+            execute = false;
+        }
+        res.json({status: execute, messages:message, items: items});
+    });
+};

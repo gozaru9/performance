@@ -5,7 +5,7 @@ tagsCtrl.controller('TagsCtrl', ['$scope', 'Tag', 'Utility', 'Modal' ,
     var resource = Tag.getResource();
     $scope.tagsList = [];
 
-    $scope.getAll = function() {
+    $scope.initialize = function() {
         
         resource.get({}, function(data){
             

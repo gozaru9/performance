@@ -4,7 +4,7 @@ organizationsCtrl.controller('OrganizationsCtrl', ['$scope', 'Organization', 'Ut
     
     var resource = Organization.getResource();
     $scope.organizationList = [];
-    $scope.getAll = function() {
+    $scope.initialize = function() {
         
         resource.get({}, function(data){
             

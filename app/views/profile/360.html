@@ -2,147 +2,15 @@
         
         <ng-include src="'views/profile/profileHeader.html'"></ng-include>
         
-              <!-- 360 - Multi Demention Feedback Section -->
-              <div class="tab-pane" id="#360">
-
+            <!-- 360 - Multi Demention Feedback Section -->
+            <div class="tab-pane" id="#360">
                 <div class="row">
-                  <div class="col-md-6">
-                    <canvas id="canvas" height="400" width="400"></canvas>
-                    <script>
-                      var radarChartData = {
-                        labels : ["Eating","Drinking","Sleeping","Designing","Coding","Partying","Running"],
-                        datasets : [
-                          {
-                            fillColor : "rgba(220,220,220,0.5)",
-                            strokeColor : "rgba(220,220,220,1)",
-                            pointColor : "rgba(220,220,220,1)",
-                            pointStrokeColor : "#fff",
-                            data : [65,59,90,81,56,55,40]
-                          },
-                          {
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)",
-                            pointColor : "rgba(151,187,205,1)",
-                            pointStrokeColor : "#fff",
-                            data : [28,48,40,19,96,27,100]
-                          }
-                        ]
-                        
-                      }
-
-                    var myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
-                    </script>
-                  </div>
-                  <div class="col-md-6">
-                    <canvas id="canvas2" height="400" width="400"></canvas>
-                    <script>
-                      var radarChartData = {
-                        labels : ["Eating","Drinking","Sleeping","Designing","Coding","Partying","Running"],
-                        datasets : [
-                          {
-                            fillColor : "rgba(220,220,220,0.5)",
-                            strokeColor : "rgba(220,220,220,1)",
-                            pointColor : "rgba(220,220,220,1)",
-                            pointStrokeColor : "#fff",
-                            data : [20,34,80,34,90,49,60]
-                          },
-                          {
-                            fillColor : "rgba(151,187,205,0.5)",
-                            strokeColor : "rgba(151,187,205,1)",
-                            pointColor : "rgba(151,187,205,1)",
-                            pointStrokeColor : "#fff",
-                            data : [48,78,39,45,80,40,100]
-                          }
-                        ]
-                        
-                      }
-
-                    var myRadar = new Chart(document.getElementById("canvas2").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
-                    </script>                    
-                  </div>
+                    <div class="col-md-6" ng-repeat="data in radarChartData">
+                        <radar-chart chart-data="data"></radar-chart>
+                    </div>
                 </div>
-
-                <div class="row">
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Header</th>
-                          <th>Header</th>
-                          <th>Header</th>
-                          <th>Header</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1,001</td>
-                          <td>Lorem</td>
-                          <td>ipsum</td>
-                          <td>dolor</td>
-                          <td>sit</td>
-                        </tr>
-                        <tr>
-                          <td>1,002</td>
-                          <td>amet</td>
-                          <td>consectetur</td>
-                          <td>adipiscing</td>
-                          <td>elit</td>
-                        </tr>
-                        <tr>
-                          <td>1,003</td>
-                          <td>Integer</td>
-                          <td>nec</td>
-                          <td>odio</td>
-                          <td>Praesent</td>
-                        </tr>
-                        <tr>
-                          <td>1,003</td>
-                          <td>libero</td>
-                          <td>Sed</td>
-                          <td>cursus</td>
-                          <td>ante</td>
-                        </tr>
-                        <tr>
-                          <td>1,004</td>
-                          <td>dapibus</td>
-                          <td>diam</td>
-                          <td>Sed</td>
-                          <td>nisi</td>
-                        </tr>
-                        <tr>
-                          <td>1,005</td>
-                          <td>Nulla</td>
-                          <td>quis</td>
-                          <td>sem</td>
-                          <td>at</td>
-                        </tr>
-                        <tr>
-                          <td>1,006</td>
-                          <td>nibh</td>
-                          <td>elementum</td>
-                          <td>imperdiet</td>
-                          <td>Duis</td>
-                        </tr>
-                        <tr>
-                          <td>1,007</td>
-                          <td>sagittis</td>
-                          <td>ipsum</td>
-                          <td>Praesent</td>
-                          <td>mauris</td>
-                        </tr>
-                        <tr>
-                          <td>1,008</td>
-                          <td>Fusce</td>
-                          <td>nec</td>
-                          <td>tellus</td>
-                          <td>sed</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-          </div>
+            </div>
+        </div>
     </div>
     <script src="js/vendor/docs.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>

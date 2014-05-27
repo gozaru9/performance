@@ -1,12 +1,16 @@
 var teamsCtrl = angular.module('teamsCtrl',['TeamServices', 'UesrServices', 'ModalService']);
-teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Utility', 'Modal' ,
-    function($scope, $routeParams, Team, User, Utility, Modal) {
+teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Skill', 'Utility', 'Modal' ,
+    function($scope, $routeParams, Team, User, Skill, Utility, Modal) {
     
     var resource = Team.getResource();
     //更新対象のチームID
     var _updateid = '';
     //チームリストに格納されている更新対象のインデックス
     var _updateIndex = null;
+    //レーダーチャート生成用の元データ
+    var _chartData = null;
+    //選択ユーザーのスキル情報を保持するデータ
+    var _userListForChart = [];
     
     //入力情報保持オブジェクト
     $scope.data = {};
@@ -16,6 +20,8 @@ teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Ut
     $scope.isCreate = true;
     //チーム一覧表示有無
     $scope.isOpenList = false;
+    //レンダーチャート用のデータ
+    $scope.radarChartData = [];
     
     //ユーザー検索後のコールバック
     function searchComplete(data) {
@@ -89,7 +95,7 @@ teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Ut
         
         $scope.selectedMemberList = [];
         
-        resource.get({}, function(data){
+        resource.get({}, function(data) {
             
             if (data.status) {
                 
@@ -105,6 +111,20 @@ teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Ut
                 
                 Utility.errorSticky(data.messages);
             }
+        });
+        
+        Skill.getResource('belong').get({}, function(data) {
+            
+            if (data.status) {
+                
+                
+                _chartData = data.items;
+
+            } else {
+                
+                Utility.errorSticky(data.messages);
+            }
+            
         });
     };
     
@@ -138,19 +158,31 @@ teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Ut
         if (!exsists) {
             
             $scope.selectedMemberList.push(item);
+            _userListForChart.push(target.skills);
         }
         //複数選択できるように改修されるかもしれないのでlengthで取得しておく
         $scope.selectedNumber = $scope.selectedMemberList.length;
         $scope.isSelected = $scope.selectedMemberList.length !== 0;
+        
+        //メンバーのスキル情報をレーダーチャートへ設定する
+        $scope.radarChartData = User.createRadarChartData(_chartData, _userListForChart);
     };
     
     //メンバーを削除する処理
     $scope.removeMember = function(index) {
         
         $scope.selectedMemberList.splice(index, 1);
+        _userListForChart.splice(index, 1);
+
         var num = $scope.selectedMemberList.length;
         $scope.isSelected = num !== 0;
         $scope.selectedNumber = num;
+        
+        if ($scope.isSelected)
+        {
+            //メンバーのスキル情報をレーダーチャートへ設定する
+            $scope.radarChartData = User.createRadarChartData(_chartData, _userListForChart);
+        }
     };
     
     //ユーザー画像押下時に詳細情報ポップアップを行う処理
@@ -185,6 +217,18 @@ teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Ut
         $scope.isCreate = false;
         _updateid = $scope.teamsList[index]._id;
         _updateIndex = index;
+        
+        var memberNum = target.member.length;
+        if (memberNum !== 0)
+        {
+            _userListForChart = [];
+            for (var mIndex = 0; mIndex < memberNum; mIndex++)
+            {
+                _userListForChart.push(target.member[mIndex].skills);
+            }
+            //メンバーのスキル情報をレーダーチャートへ設定する
+            $scope.radarChartData = User.createRadarChartData(_chartData, _userListForChart);
+        }
     };
     
     //更新を行う
@@ -201,6 +245,7 @@ teamsCtrl.controller('TeamsCtrl', ['$scope', '$routeParams', 'Team', 'User', 'Ut
         teams.$save(complete);
     };
 
+    //削除を行う
     $scope.delete = function(id, index) {
         
         resource.remove({_id:id}, function(data){

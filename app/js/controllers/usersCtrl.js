@@ -1,10 +1,10 @@
 var usersCtrl = angular.module('usersCtrl',['UesrServices','OrganizationServices', 'PostTypeServices', 'RankServices','DatepickerServices']);
-usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'Organization', 'PostsType', 'Rank','Utility', 'Datepicker',
-    function($scope, $routeParams, User, Organization, PostsType, Rank, Utility, Datepicker) {
+/**
+ * ユーザー登録/更新画面(1/3)のコントローラー
+ */
+usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', '$location', 'User', 'SharedUserModel', 'Organization', 'PostsType', 'Rank','Utility', 'Datepicker',
+    function($scope, $routeParams, $location, User, SharedUserModel, Organization, PostsType, Rank, Utility, Datepicker) {
 
-    //--------------------------------------------------------------------------
-    //　ユーザーコントローラー共通処理
-    //--------------------------------------------------------------------------
     //ユーザー情報
     $scope.data = 
         {
@@ -34,7 +34,8 @@ usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'Organizati
             ranks:'',
             entryDate: new Date(),
         };
-        
+    $scope.subtext = '';
+    
     //更新画面描画時に初期データを設定する
     function setUser(user) {
         
@@ -95,8 +96,10 @@ usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'Organizati
         });
 
         $scope.isCreate = true;
+        $scope.subtext = '新規ユーザーを作成します';
         if ($routeParams.id !== void 0) {
             $scope.isCreate = false;
+            $scope.subtext = 'ユーザー情報を更新します';
             User.getResource().get({id: $routeParams.id}, function(data) {
                 
                 if (data.status) {
@@ -161,6 +164,8 @@ usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'Organizati
                 
                 $scope.data = {};
                 Utility.success(completeMessage);
+                SharedUserModel._id = data.item._id;
+                $location.path('/member/mgt/skill');
 
             } else {
                 
@@ -168,12 +173,65 @@ usersCtrl.controller('UsersCtrl', ['$scope', '$routeParams', 'User', 'Organizati
             }
         });
     };
-
-    //--------------------------------------------------------------------------
-    //　削除専用のメソッド
-    //--------------------------------------------------------------------------
+    
+    //削除する
     $scope.remove = function() {
         console.log('remove');
     };
+}]);
+/**
+ * ユーザー登録画面(2/3)のコントローラー
+ */
+usersCtrl.controller('UsersSetSkillCtrl', ['$scope', '$location', 'User', 'SharedUserModel','Skill', 'Utility',
+    function($scope, $location, User, SharedUserModel, Skill, Utility) {
+        
+    $scope.announce = true;
+
+    $scope.initialize = function() {
+        $scope.tabStatus = {skills: true};
+        $scope.skillList = [];
+        User.getResource('skill').get({id: SharedUserModel._id}, function(data) {
+
+            if (data.status) {
+                
+                $scope.skillList = data.items.skillList;
+
+            } else {
+                
+                Utility.errorSticky(data.message);
+            }
+        });
+    };
     
+    $scope.isDisabled = function(parent, child) {
+        
+        $scope.skillList[parent].skills[child].numberOfYear = 0;
+    };
+
+    $scope.submit = function() {
+        
+        var submitInfo = User.createSkillSubmitInfo($scope.skillList);
+        var resource = User.getResource('skill');
+        var user = new resource(
+            {
+                _id: SharedUserModel._id 
+                , skill: submitInfo.skillData
+                , skillNameList: submitInfo.skillNameList
+            });
+        user.$save(function(data) {
+            
+            if (data.status) {
+                
+                Utility.success(data.message);
+
+            } else {
+                
+                Utility.errorSticky(data.message);
+            }
+        });
+    };
+    
+    $scope.finish = function() {
+        $location.path('/member/mgt');
+    };
 }]);

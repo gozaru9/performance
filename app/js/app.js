@@ -69,6 +69,11 @@ app.config(function ($routeProvider) {
             controller: 'UsersCtrl',
             resolve: {isLogin: autoCheck}
         })
+        .when('/member/mgt/skill', {
+            templateUrl: 'views/member/skill.html',
+            controller: 'UsersSetSkillCtrl',
+            resolve: {isLogin: autoCheck}
+        })
         .when('/member/mgt/:id', {
             templateUrl: 'views/member/management.html',
             controller: 'UsersCtrl',

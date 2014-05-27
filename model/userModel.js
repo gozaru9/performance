@@ -66,15 +66,14 @@ var usersSchema = new mongoose.Schema({
   keywords: {type: String},
   tags:[{ type: mongoose.Schema.Types.ObjectId, ref: 'tags' , default: null}],
 //  teams:[{ type: mongoose.Schema.Types.ObjectId, ref: 'teams', default: null }],
-  skills: {type: Array},
+  skills: {type: Object},
   remembertkn:{type: String},
   autoLoginId:{type: String},
   
   //後で追加する
   //
   //role
-  //skills
-  
+
 });
 
 // モデル化。model('モデル名', '定義したスキーマクラス')
@@ -204,7 +203,8 @@ userModel.prototype.isSameUser = function(data, callback) {
     User.findOne(query, function(err, item){
         
         var result = {isSame:false, type: 0};
-        if (null !== item) {
+        console.log(item);
+        if (item !== null && item !== void 0) {
             result.isSame = true;
             result.type = (item.employeeNumber === data.employeeNumber) ? 1 : 2;
         }
@@ -258,7 +258,7 @@ userModel.prototype.save = function(id, data, callback) {
 userModel.prototype.update = function(id, data, callback) {
     
     var User = this.db.model(collection);
-    User.findOne({_id:data.id},function(err, target){
+    User.findOne({_id:data.id},function(err, target) {
         
         if(err || target === null) {
             
@@ -312,15 +312,32 @@ userModel.prototype.update = function(id, data, callback) {
 };
 
 /**
- * ユーザーの種別を変更する
+ * ユーザーのスキルを設定する
  * 
- * @method updateType
+ * @method setSkill
  * @author niikawa
- * @param {Object} data data.userId data.targetId data.employeeType
+ * @param {Object} data data.userId data.employeeType
  * @param {Funtion} callback
  */
-userModel.prototype.updateType = function(data, callback) {
+userModel.prototype.setSkill = function(id, data, callback) {
     
+    var targetId = (data._id === void 0) ? id : data._id;
+    var User = this.db.model(collection);
+    User.findOne({_id: targetId},function(err, target) {
+        
+        if(err || target === null) {
+            
+            callback('対象が見つかりません');
+            
+        } else {
+            target.updateBy = id;
+            target.updated = moment().format('YYYY-MM-DD HH:mm:ss');
+            target.skills = data.skill;
+            //キーワードに追加する
+            target.keywords = target.keywords+data.skillNameList.join('');
+            target.save(callback);
+        }
+    });
 };
 
 /**
