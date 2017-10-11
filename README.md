@@ -1,18 +1,19 @@
-http://soplana.hateblo.jp/entry/2014/03/01/231008
-http://dim5.net/angularjs/routeprovider-template.html
+# パフォーマンスマネージメント
 
-service: ある程度まとまった関数群をまとめたUtilオブジェクト向け
-factory: ビジネスロジックをしっかり書いたりするようなモデル向け
+開発者の経歴とかを管理して総合値を出すことができれば、プロジェクトの難易度に応じてアサイン方法やメンバー構成を導き出せるはず。  
+と思い作り始める
 
-グローバルに近い値、複数コントローラで共有した値がある場合
-value, constant
-configフェーズでInjectして利用したい場合
-constant
-ステートレスなビジネスロジックを作成したい、またはユーティリティクラスを作成した場合
-service
-ステートフルなビジネスロジックを作成した場合
-factory
+## 利用技術
 
-ng-init
+### フロントエンド
 
-http://qiita.com/opengl-8080/items/2fe0a20c314b1c824cc5
+|header1|header2|バージョン|
+|FW|angular|1.2|
+
+|header1|used|version|
+|:--|--:|:--:|
+|FW|angular|1.1|
+|CSS|bootstrap|3.1|
+
+### サーバーサイド
+
