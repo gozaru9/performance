@@ -7,9 +7,6 @@
 
 ### フロントエンド
 
-|header1|header2|バージョン|
-|FW|angular|1.2|
-
 |header1|used|version|
 |:--|--:|:--:|
 |FW|angular|1.1|
